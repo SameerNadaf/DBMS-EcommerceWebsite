@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Sidebar from '../components/sidebar';
 import { styled } from '@mui/material/styles';
@@ -31,23 +32,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(id, prod, date, price) {
-  return { id, prod, date, price };
-}
-
-const rows = [
-  createData(1, 'shoes', '01/01/2004', 999),
-  createData(2, 'shoes', '01/01/2004', 999),
-  createData(3, 'shoes', '01/01/2004', 999),
-  createData(4, 'shoes', '01/01/2004', 999),
-  createData(5, 'shoes', '01/01/2004', 999),
-  createData(6, 'shoes', '01/01/2004', 999),
-  createData(7, 'shoes', '01/01/2004', 999),
-  createData(8, 'shoes', '01/01/2004', 999),
-];
-
-
 function Orders() {
+
+  useEffect(() => {fetchData()}, [])
+
+  const [data, setData] = useState([])
+  const fetchData = async () => {
+      try {
+          const resp = await axios.get('http://localhost:8081/orderstable')
+          setData(resp.data)
+          console.log(resp);
+      } catch (error) {
+          console.log(error);
+      }
+
+  }
+
   return (
     <div>
       <Box height={70} />
@@ -59,18 +59,18 @@ function Orders() {
               <TableHead>
                 <TableRow>
                   <StyledTableCell align="center">Order Id</StyledTableCell>
-                  <StyledTableCell align="center">Product</StyledTableCell>
+                  <StyledTableCell align="center">Product Id</StyledTableCell>
                   <StyledTableCell align="center">Order Date</StyledTableCell>
                   <StyledTableCell align="center">Price</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.id}>
-                    <StyledTableCell align="center" >{row.id}</StyledTableCell>
-                    <StyledTableCell align="center">{row.prod}</StyledTableCell>
-                    <StyledTableCell align="center">{row.date}</StyledTableCell>
-                    <StyledTableCell align="center">{row.price}</StyledTableCell>
+                {data.map((d,i) => (
+                  <StyledTableRow key={i}>
+                    <StyledTableCell align="center" >{d.o_id}</StyledTableCell>
+                    <StyledTableCell align="center">{d.product_id}</StyledTableCell>
+                    <StyledTableCell align="center">{d.date}</StyledTableCell>
+                    <StyledTableCell align="center">₹{d.price}</StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>

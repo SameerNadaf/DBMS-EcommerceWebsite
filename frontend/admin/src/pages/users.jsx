@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Sidebar from '../components/sidebar';
 import { styled } from '@mui/material/styles';
@@ -37,26 +38,24 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(id, fname, lname, gmail, pass) {
-  return { id, fname, lname, gmail, pass };
-}
-
-const rows = [
-  createData(1, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(2, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(3, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(4, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(5, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(6, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(7, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(8, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(9, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(10, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-  createData(11, 'sameer', 'Nadaf', 'sam@gmail.com', 'sameer@123'),
-];
-
 
 function Users() {
+
+  useEffect(() => {fetchData()}, [])
+
+  const [data, setData] = useState([])
+  const fetchData = async () => {
+      try {
+          const resp = await axios.get('http://localhost:8081/userslist')
+          setData(resp.data)
+          console.log(resp);
+      } catch (error) {
+          console.log(error);
+      }
+
+  }
+  
+
   return (
     <div>
       <Box height={70} />
@@ -76,13 +75,13 @@ function Users() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.id}>
-                    <StyledTableCell align="center" >{row.id}</StyledTableCell>
-                    <StyledTableCell align="center">{row.fname}</StyledTableCell>
-                    <StyledTableCell align="center">{row.lname}</StyledTableCell>
-                    <StyledTableCell align="center">{row.gmail}</StyledTableCell>
-                    <StyledTableCell align="center">{row.pass}</StyledTableCell>
+                {data.map((d, i) => (
+                  <StyledTableRow key={i}>
+                    <StyledTableCell align="center" >{d.u_id}</StyledTableCell>
+                    <StyledTableCell align="center">{d.fname}</StyledTableCell>
+                    <StyledTableCell align="center">{d.lname}</StyledTableCell>
+                    <StyledTableCell align="center">{d.mail}</StyledTableCell>
+                    <StyledTableCell align="center">{d.pass}</StyledTableCell>
                     <StyledTableCell align="center"><DeleteIcon className="delete-icon" /></StyledTableCell>
                   </StyledTableRow>
                 ))}

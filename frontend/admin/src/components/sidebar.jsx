@@ -220,7 +220,7 @@ function Sidebar() {
               <ListItemText primary="ORDERS" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }}>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/payments") }}>
             <ListItemButton
               sx={{
                 minHeight: 48,

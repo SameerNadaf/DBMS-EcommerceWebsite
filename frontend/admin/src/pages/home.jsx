@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../dashboard.css';
-import BarChat from '../components/barChat';
+import BarChat, { data } from '../components/barChat';
 import PieChart from '../components/pieChart';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -16,6 +17,60 @@ import Typography from '@mui/material/Typography';
 
 
 function Home() {
+
+    useEffect(() => { fetchData() }, [])
+
+    const [amount, setAmount] = useState([])
+    const fetchData = async () => {
+        try {
+            const resp = await axios.get('http://localhost:8081/totalamount')
+            setAmount(resp.data)
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    useEffect(() => { fetchOrders() }, [])
+
+    const [orders, setOrders] = useState([])
+    const fetchOrders = async () => {
+        try {
+            const resp = await axios.get('http://localhost:8081/totalorders')
+            setOrders(resp.data)
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => { fetchProducts() }, [])
+
+    const [products, setProducts] = useState([])
+    const fetchProducts = async () => {
+        try {
+            const resp = await axios.get('http://localhost:8081/totalProducts')
+            setProducts(resp.data)
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => { fetchUsers() }, [])
+
+    const [users, setUsers] = useState([])
+    const fetchUsers = async () => {
+        try {
+            const resp = await axios.get('http://localhost:8081/totalUsers')
+            setUsers(resp.data)
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className='bgcolor'>
             <Box height={70} />
@@ -31,7 +86,7 @@ function Home() {
                                             <CreditCardIcon />
                                         </div>
                                         <Typography gutterBottom variant="h5" component="div" sx={{ color: "#ffffff", marginLeft: 20 + 'px' }}>
-                                            ₹5000
+                                            ₹{amount.totalEarnings || 0}.00
                                         </Typography>
                                         <Typography gutterBottom variant="body2" component="div" sx={{ color: "#ccd1d1", marginLeft: 20 + 'px' }}>
                                             Total Earning
@@ -44,7 +99,7 @@ function Home() {
                                             <LocalShippingIcon />
                                         </div>
                                         <Typography gutterBottom variant="h5" component="div" sx={{ color: "#ffffff", marginLeft: 20 + 'px' }}>
-                                            222
+                                            {orders.totalOrders}
                                         </Typography>
                                         <Typography gutterBottom variant="body2" component="div" sx={{ color: "#ccd1d1", marginLeft: 20 + 'px' }}>
                                             Total Orders
@@ -61,7 +116,7 @@ function Home() {
                                             <CategoryIcon />
                                         </div>
                                         <div id='paddingAll' >
-                                            <span id='cardtitle' >222</span>
+                                            <span id='cardtitle' >{products.totalProducts}</span>
                                             <br />
                                             <span id='cardsubtitle' >Total Products</span>
                                         </div>
@@ -73,7 +128,7 @@ function Home() {
                                             <PersonIcon />
                                         </div>
                                         <div id='paddingAll1' >
-                                            <span id='cardtitle1' >111</span>
+                                            <span id='cardtitle1' >{users.totalUsers}</span>
                                             <br />
                                             <span id='cardsubtitle1' >Total Users</span>
                                         </div>

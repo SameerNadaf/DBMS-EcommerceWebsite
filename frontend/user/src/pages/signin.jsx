@@ -35,7 +35,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8081/login', formData);
+            const response = await axios.post('http://localhost:8081/userlogin', formData);
             console.log('Login successful', response.data);
             window.alert('Login successful!');
             navigate('/home')

@@ -36,8 +36,9 @@ function SignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        axios.post('http://localhost:8081/signup', values)
-        .then(res => console.log('registered successfully'))
+        axios.post('http://localhost:8081/usersignup', values)
+        .then(res => { console.log('registered successfully');
+        navigate('/home')})
         .catch(err => console.log(err))
     };
 

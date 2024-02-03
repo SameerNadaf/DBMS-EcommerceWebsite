@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -9,6 +9,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+
 
 const defaultTheme = createTheme();
 
@@ -16,13 +18,33 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
         });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('http://localhost:8081/admin', formData);
+            console.log('Login successful', response.data);
+            window.alert('Login successful!');
+            navigate('/home')
+            
+        } catch (error) {
+            console.error('Login failed', error);
+            window.alert('Login failed!');
+
+            // Add logic to handle login failure (e.g., display error message)
+        }
     };
 
     return (
@@ -49,9 +71,10 @@ function Login() {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Username"
                             name="email"
                             autoComplete="email"
+                            onChange={handleChange}
                         />
                         <TextField
                             required
@@ -62,13 +85,13 @@ function Login() {
                             id="password"
                             autoComplete="current-password"
                             sx={{ mt: 2 }}
+                            onChange={handleChange}
                         />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            onClick={() => { navigate("/home") }}
                         >
                             Log In
                         </Button>
