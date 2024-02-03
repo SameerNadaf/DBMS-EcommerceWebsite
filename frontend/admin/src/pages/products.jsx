@@ -66,7 +66,7 @@ function Products() {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {setOpen(false);setImage(null);}
   const [editOpen, setEditOpen] = React.useState(false);
   const [editProduct, setEditProduct] = React.useState(null);
 
@@ -121,10 +121,12 @@ function Products() {
       console.log('Product added successfully');
       toast.success('Product added successful');
       handleClose();
+      setImage(null);
       fetchData();
     } catch (error) {
       console.error('Error adding product:', error);
       toast.error('Error adding product !');
+      setImage(null);
     }
   };
 
@@ -251,8 +253,25 @@ function Products() {
                       name="image"
                       type="file"
                       onChange={handleImageChange}
+                      style={{ display: 'none' }}
                     />
+                    <label htmlFor="image">
+                      <Button
+                        variant="contained"
+                        component="span"
+                        fullWidth
+                        sx={{
+                          mt: 2,
+                          py: 1,
+                          backgroundColor: '#2f2f2f',
+                          color: '#ECEFF1',
+                        }}
+                      >
+                        {image ? image.name : 'Upload Image'}
+                      </Button>
+                    </label>
                   </Grid>
+
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>

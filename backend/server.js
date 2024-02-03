@@ -195,9 +195,10 @@ app.get('/totalUsers', (req, res) => {
     });
 });
 
-//Adding new products to the table
+// Adding new products to the table
 app.post('/addproduct', upload.single('image'), (req, res) => {
     const requiredFields = ['title', 'description', 'category', 'price'];
+    
     for (const field of requiredFields) {
         if (!req.body[field]) {
             return res.status(400).json({ error: `Missing required field: ${field}` });
@@ -225,7 +226,6 @@ app.post('/addproduct', upload.single('image'), (req, res) => {
         return res.json({ success: true, message: 'Product added successfully' });
     });
 });
-
 
 //Deleting products from the table
 app.delete('/deleteproduct/:id', (req, res) => {
@@ -256,11 +256,20 @@ app.delete('/deleteuser/:id', (req, res) => {
 // Update product details
 app.put('/updateproduct/:id', (req, res) => {
     const productId = req.params.id;
-    const updatedProduct = req.body; // Assuming the updated product details are sent in the request body
+    const updatedProduct = req.body;
+ 
+    const updateFields = Object.keys(updatedProduct).filter((field) => updatedProduct[field]);
   
-    const sql = 'UPDATE products SET ? WHERE p_id = ?';
+    if (updateFields.length === 0) {
+      return res.status(400).json({ error: 'No valid fields to update' });
+    }
   
-    db.query(sql, [updatedProduct, productId], (err, result) => {
+    const sql = `UPDATE products SET ${updateFields.map((field) => `${field} = ?`).join(', ')} WHERE p_id = ?`;
+ 
+    const values = updateFields.map((field) => updatedProduct[field]);
+    values.push(productId);
+  
+    db.query(sql, values, (err, result) => {
       if (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal Server Error' });
@@ -269,6 +278,7 @@ app.put('/updateproduct/:id', (req, res) => {
       return res.json({ success: true, message: 'Product updated successfully' });
     });
   });
+  
   
 
 

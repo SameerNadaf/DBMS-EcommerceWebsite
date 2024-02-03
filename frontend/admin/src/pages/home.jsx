@@ -14,6 +14,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import Sidebar from '../components/sidebar';
 import Typography from '@mui/material/Typography';
+import CountUp from 'react-countup';
 
 
 function Home() {
@@ -86,7 +87,7 @@ function Home() {
                                             <CreditCardIcon />
                                         </div>
                                         <Typography gutterBottom variant="h5" component="div" sx={{ color: "#ffffff", marginLeft: 20 + 'px' }}>
-                                            ₹{amount.totalEarnings || 0}.00
+                                            ₹<CountUp end={amount.totalEarnings || 0}/>
                                         </Typography>
                                         <Typography gutterBottom variant="body2" component="div" sx={{ color: "#ccd1d1", marginLeft: 20 + 'px' }}>
                                             Total Earning
@@ -99,7 +100,7 @@ function Home() {
                                             <LocalShippingIcon />
                                         </div>
                                         <Typography gutterBottom variant="h5" component="div" sx={{ color: "#ffffff", marginLeft: 20 + 'px' }}>
-                                            {orders.totalOrders}
+                                            <CountUp end={orders.totalOrders}/>
                                         </Typography>
                                         <Typography gutterBottom variant="body2" component="div" sx={{ color: "#ccd1d1", marginLeft: 20 + 'px' }}>
                                             Total Orders
@@ -116,7 +117,7 @@ function Home() {
                                             <StorefrontIcon />
                                         </div>
                                         <div id='paddingAll' >
-                                            <span id='cardtitle' >{products.totalProducts}</span>
+                                            <span id='cardtitle' ><CountUp end={products.totalProducts}/></span>
                                             <br />
                                             <span id='cardsubtitle' >Total Products</span>
                                         </div>
@@ -128,7 +129,7 @@ function Home() {
                                             <PersonIcon />
                                         </div>
                                         <div id='paddingAll1' >
-                                            <span id='cardtitle1' >{users.totalUsers}</span>
+                                            <span id='cardtitle1' ><CountUp end={users.totalUsers}/></span>
                                             <br />
                                             <span id='cardsubtitle1' >Total Users</span>
                                         </div>

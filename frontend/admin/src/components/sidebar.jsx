@@ -125,7 +125,7 @@ function Sidebar() {
           <Typography variant="h6" component="div" sx={{flexGrow: 1 }} >
             Dashboard
           </Typography>
-          <Button color="inherit" onClick={() => { navigate("/") }} >Log Out</Button>
+          <Button color="inherit" onClick={() => { navigate("/") }}>Log Out</Button>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -157,7 +157,7 @@ function Sidebar() {
               <ListItemText primary="OVERVIEW" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding sx={{ display: 'block', mb:2 }} onClick={() => { navigate("/users") }}>
+          <ListItem disablePadding sx={{ display: 'block', mb:2 }} onClick={() => { navigate("/users")}}>
             <ListItemButton
               sx={{
                 minHeight: 48,
