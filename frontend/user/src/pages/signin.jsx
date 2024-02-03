@@ -68,7 +68,6 @@ function Login() {
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <TextField
-                            required
                             fullWidth
                             id="email"
                             label="Email Address"
@@ -78,7 +77,6 @@ function Login() {
                             onChange={handleChange}
                         />
                         <TextField
-                            required
                             fullWidth
                             name="password"
                             label="Password"

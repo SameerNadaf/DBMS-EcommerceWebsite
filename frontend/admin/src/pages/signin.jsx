@@ -36,14 +36,11 @@ function Login() {
         try {
             const response = await axios.post('http://localhost:8081/admin', formData);
             console.log('Login successful', response.data);
-            window.alert('Login successful!');
             navigate('/home')
             
         } catch (error) {
             console.error('Login failed', error);
             window.alert('Login failed!');
-
-            // Add logic to handle login failure (e.g., display error message)
         }
     };
 
@@ -68,7 +65,6 @@ function Login() {
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <TextField
-                            required
                             fullWidth
                             id="email"
                             label="Username"
@@ -77,7 +73,6 @@ function Login() {
                             onChange={handleChange}
                         />
                         <TextField
-                            required
                             fullWidth
                             name="password"
                             label="Password"

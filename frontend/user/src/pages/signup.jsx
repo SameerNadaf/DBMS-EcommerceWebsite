@@ -66,7 +66,6 @@ function SignUp() {
                                 <TextField
                                     autoComplete="given-name"
                                     name="firstName"
-                                    required
                                     fullWidth
                                     id="firstName"
                                     label="First Name"
@@ -76,7 +75,6 @@ function SignUp() {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    required
                                     fullWidth
                                     id="lastName"
                                     label="Last Name"
@@ -87,7 +85,6 @@ function SignUp() {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
-                                    required
                                     fullWidth
                                     id="email"
                                     label="Email Address"
@@ -98,7 +95,6 @@ function SignUp() {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
-                                    required
                                     fullWidth
                                     name="password"
                                     label="Password"
@@ -106,12 +102,6 @@ function SignUp() {
                                     id="password"
                                     autoComplete="new-password"
                                     onChange={handleChange}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                    label="I agree to the terms and conditions of website"
                                 />
                             </Grid>
                         </Grid>

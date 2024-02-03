@@ -60,7 +60,7 @@ function Payments() {
                 <TableRow>
                   <StyledTableCell align="center">Payment Id</StyledTableCell>
                   <StyledTableCell align="center">Payment Type</StyledTableCell>
-                  <StyledTableCell align="center">Order Date</StyledTableCell>
+                  <StyledTableCell align="center">Payment Date</StyledTableCell>
                   <StyledTableCell align="center">Amount</StyledTableCell>
                   <StyledTableCell align="center">Status</StyledTableCell>
                 </TableRow>

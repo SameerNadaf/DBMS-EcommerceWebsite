@@ -1,11 +1,27 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const multer = require('multer');
+const path = require('path')
 
 const app = express();
 const port = 8081;
 app.use(cors());
 app.use(express.json());
+app.use('/images', express.static(path.join(__dirname, '../images')));
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '../images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
+    }
+})
+
+const upload = multer({
+    storage: storage
+})
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -124,7 +140,7 @@ app.get('/piechart', (req, res) => {
 
 //Query for displaying total earning
 app.get('/totalamount', (req, res) => {
-    const sql = 'SELECT SUM(amount) AS total_earnings FROM payments';
+    const sql = 'SELECT SUM(amount) AS total_earnings FROM payments WHERE status = "paid"';
     db.query(sql, (err, result) => {
         if (err) {
             console.error(err);
@@ -179,7 +195,81 @@ app.get('/totalUsers', (req, res) => {
     });
 });
 
+//Adding new products to the table
+app.post('/addproduct', upload.single('image'), (req, res) => {
+    const requiredFields = ['title', 'description', 'category', 'price'];
+    for (const field of requiredFields) {
+        if (!req.body[field]) {
+            return res.status(400).json({ error: `Missing required field: ${field}` });
+        }
+    }
 
+    if (!req.file) {
+        return res.status(400).json({ error: 'Missing image file' });
+    }
+
+    const sql = "INSERT INTO products (`title`, `description`, `category`, `price`, `image`) VALUES (?, ?, ?, ?, ?)";
+    const values = [
+        req.body.title,
+        req.body.description,
+        req.body.category,
+        req.body.price,
+        req.file.filename
+    ];
+
+    db.query(sql, values, (err, data) => {
+        if (err) {
+            console.error('Error adding product:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        return res.json({ success: true, message: 'Product added successfully' });
+    });
+});
+
+
+//Deleting products from the table
+app.delete('/deleteproduct/:id', (req, res) => {
+    const sql = "DELETE FROM products WHERE p_id = ?";
+    const id = req.params.id;
+ 
+    db.query(sql, [id], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+//Deleting user
+app.delete('/deleteuser/:id', (req, res) => {
+    const sql = "DELETE FROM user WHERE u_id = ?";
+    const id = req.params.id;
+ 
+    db.query(sql, [id], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+// Update product details
+app.put('/updateproduct/:id', (req, res) => {
+    const productId = req.params.id;
+    const updatedProduct = req.body; // Assuming the updated product details are sent in the request body
+  
+    const sql = 'UPDATE products SET ? WHERE p_id = ?';
+  
+    db.query(sql, [updatedProduct, productId], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+  
+      return res.json({ success: true, message: 'Product updated successfully' });
+    });
+  });
+  
 
 
 

@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import PersonIcon from '@mui/icons-material/Person';
-import CategoryIcon from '@mui/icons-material/Category';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import Sidebar from '../components/sidebar';
 import Typography from '@mui/material/Typography';
 
@@ -113,7 +113,7 @@ function Home() {
                                 <Card id='gradient2' sx={{ minWidth: 345 }}>
                                     <Stack direction="row" spacing={2}>
                                         <div id='iconstyle'>
-                                            <CategoryIcon />
+                                            <StorefrontIcon />
                                         </div>
                                         <div id='paddingAll' >
                                             <span id='cardtitle' >{products.totalProducts}</span>

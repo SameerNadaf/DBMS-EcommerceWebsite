@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -55,6 +56,16 @@ function Users() {
 
   }
   
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete('http://localhost:8081/deleteuser/'+id)
+      window.location.reload();
+    }
+    catch (err) {
+      console.log(err);
+    }
+
+  };
 
   return (
     <div>
@@ -82,7 +93,9 @@ function Users() {
                     <StyledTableCell align="center">{d.lname}</StyledTableCell>
                     <StyledTableCell align="center">{d.mail}</StyledTableCell>
                     <StyledTableCell align="center">{d.pass}</StyledTableCell>
-                    <StyledTableCell align="center"><DeleteIcon className="delete-icon" /></StyledTableCell>
+                    <StyledTableCell align="center"><IconButton aria-label="delete" onClick={ e => handleDelete(d.u_id)}>
+                      <DeleteIcon className="delete-icon" />
+                    </IconButton></StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
