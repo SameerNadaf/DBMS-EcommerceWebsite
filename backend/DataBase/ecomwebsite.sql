@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 09:03 PM
+-- Generation Time: Feb 03, 2024 at 06:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,13 +32,6 @@ CREATE TABLE `admin` (
   `a_username` varchar(50) NOT NULL,
   `a_password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`a_id`, `a_username`, `a_password`) VALUES
-(1, 'admin', 'password123');
 
 -- --------------------------------------------------------
 
@@ -75,9 +68,10 @@ CREATE TABLE `orders` (
 CREATE TABLE `payments` (
   `pay_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `type` varchar(30) NOT NULL,
   `date` date NOT NULL,
-  `amount` int(11) NOT NULL
+  `amount` int(11) NOT NULL,
+  `status` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -89,8 +83,8 @@ CREATE TABLE `payments` (
 CREATE TABLE `products` (
   `p_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
-  `description` varchar(250) NOT NULL,
   `image` varchar(250) NOT NULL,
+  `description` varchar(250) NOT NULL,
   `category` text NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

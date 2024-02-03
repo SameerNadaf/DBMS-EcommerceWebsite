@@ -12,6 +12,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -59,7 +61,8 @@ function Users() {
   const handleDelete = async (id) => {
     try {
       await axios.delete('http://localhost:8081/deleteuser/'+id)
-      window.location.reload();
+      toast.success('User deleted successful');
+      fetchData();
     }
     catch (err) {
       console.log(err);
@@ -69,6 +72,18 @@ function Users() {
 
   return (
     <div>
+      <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
       <Box height={70} />
       <Box sx={{ display: 'flex' }}>
         <Sidebar />

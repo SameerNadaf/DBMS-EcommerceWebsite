@@ -19,6 +19,8 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const style = {
   position: 'absolute',
@@ -117,20 +119,24 @@ function Products() {
         },
       });
       console.log('Product added successfully');
+      toast.success('Product added successful');
       handleClose();
       fetchData();
     } catch (error) {
       console.error('Error adding product:', error);
+      toast.error('Error adding product !');
     }
   };
 
   const handleDelete = async (id) => {
     try {
       await axios.delete('http://localhost:8081/deleteproduct/' + id)
-      window.location.reload();
+      toast.success('Product deleted successful');
+      fetchData();
     }
     catch (err) {
       console.log(err);
+      toast.error('Error deleting product !');
     }
 
   };
@@ -160,15 +166,29 @@ function Products() {
       await axios.put(`http://localhost:8081/updateproduct/${editProduct.p_id}`, updatedProduct);
   
       console.log('Product updated successfully');
+      toast.success('Product updated successfully');
       handleEditClose();
       fetchData();
     } catch (error) {
       console.error('Error updating product:', error);
+      toast.error('Error updating product !');
     }
   };
 
   return (
     <div>
+      <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
       <Box height={70} />
       <Box sx={{ display: 'flex' }}>
         <Sidebar />
