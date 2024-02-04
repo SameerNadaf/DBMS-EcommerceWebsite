@@ -1,35 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
+import axios from 'axios';
 
-export const data = [
-  ["Year", "Sales", "Expenses", "Profit"],
-  ["2014", 1000, 400, 200],
-  ["2015", 1170, 460, 250],
-  ["2016", 660, 1120, 300],
-  ["2017", 1030, 540, 350],
-  ["2018", 1000, 500, 300],
-  ["2019", 1100, 560, 330],
-  ["2020", 1030, 540, 350],
-];
+function BarChart() {
+  const [data, setData] = useState([]);
 
-export const options = {
-  chart: {
-    title: "Company Performance",
-    subtitle: "sales products profit",
-  },
-  colors: ["rgb(53, 138, 158)","rgb(37, 11, 165)","#188310"],
-};
+  const fetchData = async () => {
+    try {
+      const resp = await axios.get('http://localhost:8081/ordersPerDay');
+      setData(resp.data);
+    } catch (error) {
+      console.error('Error fetching product data:', error);
+    }
+  };
 
-function BarChat() {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const chartData = [["date", "orders"], ...data.map((row) => [row.orderDay, row.orderCount])];
+
+  const options = {
+    chart: {
+      title: "Orders Per Day",
+      subtitle: "Total Number of Orders for Each Day",
+    },
+    legend: { position: 'none' },
+    colors: "rgb(53, 138, 158)",
+  };
+
   return (
     <Chart
       chartType="Bar"
       width="100%"
       height="400px"
-      data={data}
+      data={chartData}
       options={options}
     />
   );
 }
 
-export default BarChat;
+export default BarChart;

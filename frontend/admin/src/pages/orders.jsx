@@ -58,7 +58,7 @@ function Orders() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell align="center">Order Id</StyledTableCell>
+                  <StyledTableCell align="center">Serial Number</StyledTableCell>
                   <StyledTableCell align="center">Product Id</StyledTableCell>
                   <StyledTableCell align="center">Order Date</StyledTableCell>
                   <StyledTableCell align="center">Price</StyledTableCell>
@@ -67,9 +67,9 @@ function Orders() {
               <TableBody>
                 {data.map((d,i) => (
                   <StyledTableRow key={i}>
-                    <StyledTableCell align="center" >{d.o_id}</StyledTableCell>
+                    <StyledTableCell align="center">{i + 1}</StyledTableCell>
                     <StyledTableCell align="center">{d.product_id}</StyledTableCell>
-                    <StyledTableCell align="center">{d.date}</StyledTableCell>
+                    <StyledTableCell align="center">{d.orderDate}</StyledTableCell>
                     <StyledTableCell align="center">₹{d.price}</StyledTableCell>
                   </StyledTableRow>
                 ))}

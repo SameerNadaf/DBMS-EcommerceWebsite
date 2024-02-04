@@ -58,7 +58,7 @@ function Payments() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell align="center">Payment Id</StyledTableCell>
+                <StyledTableCell align="center">Serial Number</StyledTableCell>
                   <StyledTableCell align="center">Payment Type</StyledTableCell>
                   <StyledTableCell align="center">Payment Date</StyledTableCell>
                   <StyledTableCell align="center">Amount</StyledTableCell>
@@ -68,9 +68,9 @@ function Payments() {
               <TableBody>
                 {data.map((d, i) => (
                   <StyledTableRow key={i}>
-                    <StyledTableCell align="center" >{d.pay_id}</StyledTableCell>
+                    <StyledTableCell align="center">{i + 1}</StyledTableCell>
                     <StyledTableCell align="center">{d.type}</StyledTableCell>
-                    <StyledTableCell align="center">{d.date}</StyledTableCell>
+                    <StyledTableCell align="center">{d.orderDate}</StyledTableCell>
                     <StyledTableCell align="center">₹{d.amount}</StyledTableCell>
                     <StyledTableCell align="center">{d.status}</StyledTableCell>
                   </StyledTableRow>

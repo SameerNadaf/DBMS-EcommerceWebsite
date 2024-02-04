@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../dashboard.css';
-import BarChat, { data } from '../components/barChat';
+import BarChart from '../components/barChat';
 import PieChart from '../components/pieChart';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -143,7 +143,7 @@ function Home() {
                         <Grid item xs={8}>
                             <Card sx={{ height: 60 + "vh" }}>
                                 <CardContent>
-                                    <BarChat />
+                                    <BarChart />
                                 </CardContent>
                             </Card>
                         </Grid>

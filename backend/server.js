@@ -89,7 +89,7 @@ app.get('/productstable', (req, res) => {
 
 //Orders table 
 app.get('/orderstable', (req, res) => {
-    const sql = 'SELECT * FROM orders';
+    const sql = 'SELECT * ,DATE_FORMAT(date, "%Y-%m-%d") AS orderDate FROM orders';
     db.query(sql, (err, result) => {
         if (err) {
             console.error(err);
@@ -104,9 +104,9 @@ app.get('/orderstable', (req, res) => {
     });
 });
 
-//Orders table 
+//Payments table 
 app.get('/paymentstable', (req, res) => {
-    const sql = 'SELECT * FROM payments';
+    const sql = 'SELECT *,DATE_FORMAT(date, "%Y-%m-%d") AS orderDate FROM payments';
     db.query(sql, (err, result) => {
         if (err) {
             console.error(err);
@@ -137,6 +137,34 @@ app.get('/piechart', (req, res) => {
         return res.send(result);
     });
 });
+
+//Query for bar chart
+app.get("/ordersPerDay", (req, res) => {
+    const sql = `
+    SELECT
+    SUBSTRING(date, 9, 2) AS orderDay,
+    COUNT(o_id) AS orderCount
+FROM
+    orders
+GROUP BY
+    orderDay
+ORDER BY
+    date;
+    `;
+  
+    db.query(sql, (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+  
+      if (result.length === 0) {
+        return res.status(404).json({ error: "No data found" });
+      }
+  
+      return res.json(result);
+    });
+  });
 
 //Query for displaying total earning
 app.get('/totalamount', (req, res) => {

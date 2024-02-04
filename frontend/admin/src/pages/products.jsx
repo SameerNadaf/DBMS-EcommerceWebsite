@@ -380,7 +380,7 @@ function Products() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell align="center">Product Id</StyledTableCell>
+                <StyledTableCell align="center">Serial Number</StyledTableCell>
                   <StyledTableCell align="center">Image</StyledTableCell>
                   <StyledTableCell align="center">Product Name</StyledTableCell>
                   <StyledTableCell align="center">Product Description</StyledTableCell>
@@ -393,7 +393,7 @@ function Products() {
               <TableBody>
                 {data.map((d, i) => (
                   <StyledTableRow key={i}>
-                    <StyledTableCell align="center" >{d.p_id}</StyledTableCell>
+                    <StyledTableCell align="center">{i + 1}</StyledTableCell>
                     <StyledTableCell align="center">
                       {d.image && <img src={`http://localhost:8081/images/${d.image}`} alt="Product Image" style={{ width: '50px', height: '50px' }} />}
                     </StyledTableCell>

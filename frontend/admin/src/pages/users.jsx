@@ -92,7 +92,7 @@ function Users() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell align="center">User Id</StyledTableCell>
+                <StyledTableCell align="center">Serial Number</StyledTableCell>
                   <StyledTableCell align="center">First Name</StyledTableCell>
                   <StyledTableCell align="center">Last Name</StyledTableCell>
                   <StyledTableCell align="center">Gmail</StyledTableCell>
@@ -103,7 +103,7 @@ function Users() {
               <TableBody>
                 {data.map((d, i) => (
                   <StyledTableRow key={i}>
-                    <StyledTableCell align="center" >{d.u_id}</StyledTableCell>
+                    <StyledTableCell align="center">{i + 1}</StyledTableCell>
                     <StyledTableCell align="center">{d.fname}</StyledTableCell>
                     <StyledTableCell align="center">{d.lname}</StyledTableCell>
                     <StyledTableCell align="center">{d.mail}</StyledTableCell>
