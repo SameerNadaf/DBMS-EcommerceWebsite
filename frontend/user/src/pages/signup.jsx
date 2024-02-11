@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
 
@@ -31,16 +33,35 @@ function SignUp() {
         setValues({...values, [event.target.name]: [event.target.value] })
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         
-        axios.post('http://localhost:8081/usersignup', values)
-        .then(res => { console.log('registered successfully');
-        navigate('/home')})
-        .catch(err => console.log(err))
+        try {
+        const response = await axios.post('http://localhost:8081/usersignup', values)
+        console.log('Login successful', response.data);
+        toast.success('SignUp successful');
+        navigate('/home')
+
+        }
+        catch (error) {
+            console.error('Login failed', error);
+            toast.error('SignUp failed');
+        }
     };
 
     return (
+        <>
+        <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -122,6 +143,7 @@ function SignUp() {
                 </Box>
             </Container>
         </ThemeProvider>
+        </>
     );
 }
 

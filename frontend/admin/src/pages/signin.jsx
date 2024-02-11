@@ -41,7 +41,8 @@ function Login() {
             toast.success('Login successful');
             navigate('/home')
 
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Login failed', error);
             toast.error('Login failed');
         }

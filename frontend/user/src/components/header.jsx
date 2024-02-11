@@ -358,10 +358,13 @@ function Header() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
+                            <MenuItem onClick={() => { navigate("/signin") }}>
+                                <Typography textAlign="center">Login</Typography>
+                            </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center">Account</Typography>
                             </MenuItem>
-                            <MenuItem onClick={handleCloseUserMenu}>
+                            <MenuItem onClick={() => { navigate("/signup") }}>
                                 <Typography textAlign="center">Logout</Typography>
                             </MenuItem>
                         </Menu>

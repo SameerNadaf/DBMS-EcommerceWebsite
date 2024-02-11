@@ -12,6 +12,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const defaultTheme = createTheme();
 
@@ -37,18 +40,30 @@ function Login() {
         try {
             const response = await axios.post('http://localhost:8081/userlogin', formData);
             console.log('Login successful', response.data);
-            window.alert('Login successful!');
+            toast.success('Login successful');
             navigate('/home')
             
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Login failed', error);
-            window.alert('Login failed!');
+            toast.error('Login failed');
 
-            // Add logic to handle login failure (e.g., display error message)
         }
     };
 
     return (
+        <>
+        <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -106,6 +121,7 @@ function Login() {
                 </Box>
             </Container>
         </ThemeProvider>
+        </>
     );
 }
 

@@ -316,22 +316,23 @@ app.put('/updateproduct/:id', (req, res) => {
 
 //user signup
 app.post('/usersignup', (req, res) => {
+    const { firstName, lastName, email, password } = req.body;
+
+    if (!firstName || !lastName || !email || !password) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
+
     const sql = "INSERT INTO user (`fname`, `lname`, `mail`, `pass`) VALUES (?, ?, ?, ?)";
-    
-    const values = [
-        req.body.firstName,
-        req.body.lastName,
-        req.body.email,
-        req.body.password,
-    ];
+    const values = [firstName, lastName, email, password];
 
     db.query(sql, values, (err, data) => {
         if (err) {
-            return res.json(err);
+            return res.status(500).json({ error: "Error inserting data into the database" });
         }
-        return res.json(data);
+        return res.json({ success: true, data });
     });
 });
+
 
 //user login
 app.post('/userlogin', (req, res) => {
