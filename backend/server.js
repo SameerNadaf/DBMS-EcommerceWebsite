@@ -24,6 +24,7 @@ const upload = multer({
 })
 
 const db = mysql.createConnection({
+    connectionLimit: 10,
     host: 'localhost',
     user: 'root',
     password: '',
@@ -348,6 +349,48 @@ app.post('/userlogin', (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
         return res.status(200).json({ message: 'Login successful' });
+    });
+});
+
+//Wishlist query
+app.get('/userslist/:userId/wishlist', (req, res) => {
+    const userId = req.params.userId;
+
+    const sql = `
+        SELECT products.*
+        FROM products
+        JOIN wishlist ON products.product_id = wishlist.product_id
+        WHERE wishlist.user_id = ?;
+    `;
+
+    db.query(sql, [userId], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'No wishlisted products found for the user' });
+        }
+
+        return res.send(result);
+    });
+});
+
+//Products
+app.get('/kidsproducts', (req, res) => {
+    const sql = 'SELECT * FROM products';
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'No products found' });
+        }
+
+        return res.send(result);
     });
 });
 
