@@ -378,8 +378,9 @@ app.get('/userslist/:userId/wishlist', (req, res) => {
 });
 
 //Products
-app.get('/kidsproducts', (req, res) => {
-    const sql = 'SELECT * FROM products';
+//mens products
+app.get('/menproducts', (req, res) => {
+    const sql = 'SELECT * FROM products WHERE category = "men"';
     db.query(sql, (err, result) => {
         if (err) {
             console.error(err);
@@ -387,7 +388,41 @@ app.get('/kidsproducts', (req, res) => {
         }
 
         if (result.length === 0) {
-            return res.status(404).json({ error: 'No products found' });
+            return res.status(404).json({ error: 'No mens products found' });
+        }
+
+        return res.send(result);
+    });
+});
+
+//womens products
+app.get('/womenproducts', (req, res) => {
+    const sql = 'SELECT * FROM products WHERE category = "women"';
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'No womens products found' });
+        }
+
+        return res.send(result);
+    });
+});
+
+//kids products
+app.get('/kidsproducts', (req, res) => {
+    const sql = 'SELECT * FROM products WHERE category = "kids"';
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'No kids products found' });
         }
 
         return res.send(result);

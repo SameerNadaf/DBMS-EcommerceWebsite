@@ -6,21 +6,47 @@ import './product.css';
 import Grid from '@mui/material/Grid';
 
 function Products() {
+
     useEffect(() => {
-        fetchData();
+        fetchMen();
+        fetchWomen();
+        fetchKids();
     }, []);
 
-    const [data, setData] = useState([]);
-    const fetchData = async () => {
+    const [men, setMen] = useState([]);
+    const [women, setWomen] = useState([]);
+    const [kids, setKids] = useState([]);
+
+    const fetchMen = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/kidsproducts');
-            setData(resp.data);
+            const resp = await axios.get('http://localhost:8081/menproducts');
+            setMen(resp.data);
             console.log(resp);
-            fetchData();
         } catch (error) {
             console.log(error);
         }
     };
+
+    const fetchWomen = async () => {
+        try {
+            const resp = await axios.get('http://localhost:8081/womenproducts');
+            setWomen(resp.data);
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchKids = async () => {
+        try {
+            const resp = await axios.get('http://localhost:8081/kidsproducts');
+            setKids(resp.data);
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     return (
         <div>
@@ -30,8 +56,8 @@ function Products() {
                 <h1>Kids Shoes</h1>
 
                 <Grid container spacing={2}>
-                    {data.map((d) => (
-                        <Grid item xs={12} sm={6} md={3} key={d.id}>
+                    {kids?.map((d, i) => (
+                        <Grid item xs={12} sm={6} md={3} key={i}>
                             <div className="box">
                                 <div className="card">
                                     <div className="small_card">
@@ -72,8 +98,8 @@ function Products() {
                 <h1>Womens Shoes</h1>
 
                 <Grid container spacing={2}>
-                    {data.map((d) => (
-                        <Grid item xs={12} sm={6} md={3} key={d.id}>
+                    {women?.map((d, i) => (
+                        <Grid item xs={12} sm={6} md={3} key={i}>
                             <div className="box">
                                 <div className="card">
                                     <div className="small_card">
@@ -114,8 +140,8 @@ function Products() {
                 <h1>Mens Shoes</h1>
 
                 <Grid container spacing={2}>
-                    {data.map((d) => (
-                        <Grid item xs={12} sm={6} md={3} key={d.id}>
+                    {men?.map((d, i) => (
+                        <Grid item xs={12} sm={6} md={3} key={i}>
                             <div className="box">
                                 <div className="card">
                                     <div className="small_card">
