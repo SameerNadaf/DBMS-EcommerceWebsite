@@ -143,15 +143,18 @@ app.get('/piechart', (req, res) => {
 app.get("/ordersPerDay", (req, res) => {
     const sql = `
     SELECT
-    SUBSTRING(date, 9, 2) AS orderDay,
-    COUNT(o_id) AS orderCount
-FROM
-    orders
-GROUP BY
-    orderDay
-ORDER BY
-    date;
-    `;
+      SUBSTRING(o.date, 9, 2) AS orderDay,
+      COUNT(CASE WHEN p.category = 'men' THEN o.o_id END) AS menCount,
+      COUNT(CASE WHEN p.category = 'women' THEN o.o_id END) AS womenCount,
+      COUNT(CASE WHEN p.category = 'kids' THEN o.o_id END) AS kidsCount
+    FROM
+      orders o
+      JOIN products p ON o.product_id = p.p_id
+    GROUP BY
+      orderDay
+    ORDER BY
+      orderDay;
+  `;
   
     db.query(sql, (err, result) => {
       if (err) {

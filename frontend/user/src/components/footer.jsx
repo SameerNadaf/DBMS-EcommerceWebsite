@@ -4,7 +4,7 @@ import './style.css'
 function Footer() {
   return (
     <>
-      <footer>
+      <footer >
         <div className="footer_main">
             <div className="tag">
                 <h1>Contact</h1>

@@ -6,7 +6,7 @@ import '../styles.css';
 function Home (){
 
   return (
-    <div>
+    <>
       <Header/>
       <div style={{marginBottom: 100}}>
         <section>
@@ -39,7 +39,7 @@ function Home (){
         </section>
       </div>
       <Footer/>
-    </div>
+    </>
   )
 }
 

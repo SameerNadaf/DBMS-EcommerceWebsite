@@ -18,7 +18,8 @@ function BarChart() {
     fetchData();
   }, []);
 
-  const chartData = [["date", "orders"], ...data.map((row) => [row.orderDay, row.orderCount])];
+  const chartData = [["date", "men", "women", "kids"], 
+  ...data.map((row) => [row.orderDay, row.menCount, row.womenCount, row.kidsCount])];
 
   const options = {
     chart: {
@@ -26,7 +27,7 @@ function BarChart() {
       subtitle: "Total Number of Orders for Each Day",
     },
     legend: { position: 'none' },
-    colors: "rgb(53, 138, 158)",
+    colors: ["rgb(53, 138, 158)", "rgb(37, 11, 165)", "#188310"],
   };
 
   return (

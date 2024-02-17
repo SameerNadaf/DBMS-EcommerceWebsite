@@ -53,10 +53,10 @@ function Products() {
             <Header />
 
             <div className="products" id="kidsShoes">
-                <h1>Kids Shoes</h1>
+                <h1>Mens Shoes</h1>
 
                 <Grid container spacing={2}>
-                    {kids?.map((d, i) => (
+                    {men?.map((d, i) => (
                         <Grid item xs={12} sm={6} md={3} key={i}>
                             <div className="box">
                                 <div className="card">
@@ -137,10 +137,10 @@ function Products() {
             </div>
 
             <div className="products" id="kidsShoes">
-                <h1>Mens Shoes</h1>
+                <h1>Kids Shoes</h1>
 
                 <Grid container spacing={2}>
-                    {men?.map((d, i) => (
+                    {kids?.map((d, i) => (
                         <Grid item xs={12} sm={6} md={3} key={i}>
                             <div className="box">
                                 <div className="card">
