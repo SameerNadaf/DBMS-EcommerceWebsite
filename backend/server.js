@@ -436,3 +436,22 @@ app.get('/kidsproducts', (req, res) => {
 app.listen(port, () => {
     console.log(`Listening to port ${port}`);
 });
+
+//footer newsletter
+app.post('/newsletter', (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
+
+    const sql = "INSERT INTO newsletter (`email`) VALUES (?)";
+    const values = [email];
+
+    db.query(sql, values, (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: "Error inserting data into the database" });
+        }
+        return res.json({ success: true, data });
+    });
+});

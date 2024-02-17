@@ -10,9 +10,9 @@ function Home (){
       <Header/>
       <div style={{marginBottom: 100}}>
         <section>
-        <div class="main" id="Home">
-            <div class="main_content">
-                <div class="main_text">
+        <div className="main" id="Home">
+            <div className="main_content">
+                <div className="main_text">
                     <h1>Footwear<br/><span>Collection</span></h1>
                     <p>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
@@ -21,19 +21,19 @@ function Home (){
                         five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                     </p>
                 </div>
-                <div class="main_image">
+                <div className="main_image">
                     <img src="/image/shoes.png"/>
                 </div>
             </div>
-            <div class="social_icon">
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-twitter"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-linkedin-in"></i>
+            <div className="social_icon">
+                <i className="fa-brands fa-facebook-f"></i>
+                <i className="fa-brands fa-twitter"></i>
+                <i className="fa-brands fa-instagram"></i>
+                <i className="fa-brands fa-linkedin-in"></i>
             </div>
-            <div class="button" >
+            <div className="button" >
                 <a href='/products'>SHOP NOW</a>
-                <i class="fa-solid fa-chevron-right"></i>
+                <i className="fa-solid fa-chevron-right"></i>
             </div>
         </div>
         </section>

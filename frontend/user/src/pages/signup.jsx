@@ -1,7 +1,7 @@
 import React from 'react';
 import * as ReactRouterDom from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
