@@ -357,24 +357,45 @@ app.post('/userlogin', (req, res) => {
 });
 
 //Wishlist query
-app.get('/userslist/:userId/wishlist', (req, res) => {
-    const userId = req.params.userId;
+app.get('/wishlist', (req, res) => {
 
     const sql = `
-        SELECT products.*
-        FROM products
-        JOIN wishlist ON products.product_id = wishlist.product_id
-        WHERE wishlist.user_id = ?;
+    SELECT products.*
+    FROM wishlist
+    JOIN products ON wishlist.product_id = products.p_id;
     `;
 
-    db.query(sql, [userId], (err, result) => {
+    db.query(sql, (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ error: 'Internal Server Error' });
         }
 
         if (result.length === 0) {
-            return res.status(404).json({ error: 'No wishlisted products found for the user' });
+            return res.status(404).json({ error: 'No wishlisted products found' });
+        }
+
+        return res.send(result);
+    });
+});
+
+//Cart query
+app.get('/cart', (req, res) => {
+
+    const sql = `
+    SELECT products.*
+    FROM cart
+    JOIN products ON cart.product_id = products.p_id;
+    `;
+
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'No cart products found' });
         }
 
         return res.send(result);
@@ -433,10 +454,6 @@ app.get('/kidsproducts', (req, res) => {
     });
 });
 
-app.listen(port, () => {
-    console.log(`Listening to port ${port}`);
-});
-
 //footer newsletter
 app.post('/newsletter', (req, res) => {
     const { email } = req.body;
@@ -454,4 +471,66 @@ app.post('/newsletter', (req, res) => {
         }
         return res.json({ success: true, data });
     });
+});
+
+//Deleting products from the cart
+app.delete('/cartdelete/:id', (req, res) => {
+    const sql = "DELETE FROM cart WHERE product_id = ?";
+    const id = req.params.id;
+ 
+    db.query(sql, [id], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+// Adding a product to the cart
+app.post('/addtocart/:id', (req, res) => {
+    const productId = req.params.id;
+
+    const sql = "INSERT INTO cart (product_id) VALUES (?)";
+    
+    db.query(sql, [productId], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+// Adding a product to the wishlist
+app.post('/addtowishlist/:id', (req, res) => {
+    const productId = req.params.id;
+
+    const sql = "INSERT INTO wishlist (product_id) VALUES (?)";
+    
+    db.query(sql, [productId], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+//Deleting products from the wishlist
+app.delete('/wishlistdelete/:id', (req, res) => {
+    const sql = "DELETE FROM wishlist WHERE product_id = ?";
+    const id = req.params.id;
+ 
+    db.query(sql, [id], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+
+
+
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });

@@ -98,6 +98,7 @@
 .products .box .card .products_text .btn {
     text-decoration: none;
     padding: 10px 20px;
+    border: none;
     background: linear-gradient(to right, #c72092, #6c14d0);
     color: white;
 }

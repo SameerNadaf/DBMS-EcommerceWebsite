@@ -4,6 +4,10 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import './product.css';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Products() {
 
@@ -48,8 +52,45 @@ function Products() {
     };
 
 
+    const handleAddToCart = async (id) => {
+        try {
+            await axios.post('http://localhost:8081/addtocart/' + id)
+            console.log('Product deleted successful');
+
+        }
+        catch (err) {
+            console.log('Error deleting product !', err);
+        }
+
+    };
+
+    const handleAddToWish = async (id) => {
+        try {
+            await axios.post('http://localhost:8081/addtowishlist/' + id)
+            console.log('Product deleted successful');
+            
+        }
+        catch (err) {
+            console.log('Error deleting product !', err);
+        }
+
+    };
+
+
     return (
         <div>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
             <Header />
 
             <div className="products" id="kidsShoes">
@@ -60,8 +101,8 @@ function Products() {
                         <Grid item xs={12} sm={6} md={3} key={i}>
                             <div className="box">
                                 <div className="card">
-                                    <div className="small_card">
-                                        <i className="fa-solid fa-heart"></i>
+                                    <div className="small_card" onClick={() => handleAddToWish(d.p_id)} >
+                                        <i className="fa-solid fa-heart" ></i>
                                     </div>
                                     <div className="image">
                                         {d.image && (
@@ -82,9 +123,7 @@ function Products() {
                                             <i className="fa-solid fa-star"></i>
                                             <i className="fa-solid fa-star"></i>
                                         </div>
-                                        <a href="#" className="btn">
-                                            Add To Cart
-                                        </a>
+                                        <Button className="btn" onClick={() => handleAddToCart(d.p_id)}>Add To Cart</Button>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +141,7 @@ function Products() {
                         <Grid item xs={12} sm={6} md={3} key={i}>
                             <div className="box">
                                 <div className="card">
-                                    <div className="small_card">
+                                    <div className="small_card" onClick={() => handleAddToWish(d.p_id)}>
                                         <i className="fa-solid fa-heart"></i>
                                     </div>
                                     <div className="image">
@@ -124,9 +163,7 @@ function Products() {
                                             <i className="fa-solid fa-star"></i>
                                             <i className="fa-solid fa-star"></i>
                                         </div>
-                                        <a href="#" className="btn">
-                                            Add To Cart
-                                        </a>
+                                        <Button className="btn" onClick={() => handleAddToCart(d.p_id)}>Add To Cart</Button>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +181,7 @@ function Products() {
                         <Grid item xs={12} sm={6} md={3} key={i}>
                             <div className="box">
                                 <div className="card">
-                                    <div className="small_card">
+                                    <div className="small_card" onClick={() => handleAddToWish(d.p_id)}>
                                         <i className="fa-solid fa-heart"></i>
                                     </div>
                                     <div className="image">
@@ -166,9 +203,7 @@ function Products() {
                                             <i className="fa-solid fa-star"></i>
                                             <i className="fa-solid fa-star"></i>
                                         </div>
-                                        <a href="#" className="btn">
-                                            Add To Cart
-                                        </a>
+                                        <Button className="btn" onClick={() => handleAddToCart(d.p_id)}>Add To Cart</Button>
                                     </div>
                                 </div>
                             </div>

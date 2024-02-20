@@ -79,7 +79,7 @@ function Login() {
                         <PersonIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Log in
+                        Sign in
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <TextField

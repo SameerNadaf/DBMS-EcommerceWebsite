@@ -63,7 +63,7 @@ function Footer() {
                     <div className="tag">
                         <h1>Our Stores</h1>
                         <a href="#" className="center">India</a>
-                        <a href="#" className="center">US</a>
+                        <a href="#" className="center">USA</a>
                         <a href="#" className="center">Switzerland</a>
                         <a href="#" className="center">Germany</a>
                     </div>

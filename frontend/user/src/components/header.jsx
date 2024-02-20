@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,19 +16,45 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Popover from '@mui/material/Popover';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import DeleteIcon from '@mui/icons-material/Delete';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import Modal from '@mui/material/Modal';
+import Paper from '@mui/material/Paper';
+
 
 
 function WishlistPopover({ open, anchorEl, handleClose }) {
-    // Replace the following with your logic to fetch and display wishlisted products
-    const wishlistedProducts = [
-        { id: 1, title: "Product 1", description: "Description for Product 1", image: "/path/to/image1.jpg" },
-        { id: 2, title: "Product 2", description: "Description for Product 2", image: "/path/to/image2.jpg" },
-        { id: 3, title: "Product 3", description: "Description for Product 3", image: "/path/to/image3.jpg" },
-    ];
+
+    useEffect(() => {
+        fetchWish();
+    }, []);
+
+    const [wish, setWish] = useState([]);
+
+    const fetchWish = async () => {
+        try {
+            const resp = await axios.get('http://localhost:8081/wishlist');
+            setWish(resp.data);
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleDeleteItem = async (id) => {
+        try {
+            await axios.delete('http://localhost:8081/wishlistdelete/' + id)
+            console.log('Product deleted successful');
+            fetchWish();
+        }
+        catch (err) {
+            console.log('Error deleting product !', err);
+        }
+
+    };
 
     return (
         <Popover
@@ -43,28 +70,48 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                 horizontal: 'center',
             }}
         >
-            <Box sx={{ p: 2, width: 300 }}>
-                <Typography variant="h6" component="div">
-                    Your Wishlisted Products
+            <Box sx={{ p: 2, width: 300, textAlign: 'center' }}>
+                <Typography variant="h6" component="div"
+                    sx={{
+                        background: 'linear-gradient(to right, #c72092, #6c14d0)',
+                        WebkitBackgroundClip: 'text', color: 'transparent',
+                        fontWeight: 'bold', marginBottom: 2
+                    }}>
+                    YOUR WISHLIST PRODUCTS
                 </Typography>
                 <Grid container spacing={2}>
-                    {wishlistedProducts.map((product) => (
-                        <Grid item xs={12} key={product.id}>
-                                <Card sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-                                    <CardMedia
-                                        sx={{ width: 60, height: 60, marginRight: 2 }}
-                                        image={product.image}
-                                        title={product.title}
-                                    />
-                                    <CardContent>
-                                        <Typography variant="h5" component="div">
-                                            ssddllff
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            ₹999
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
+                    {wish?.map((data, i) => (
+                        <Grid item xs={12} key={i}>
+                            <Card sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+                                <CardMedia
+                                    sx={{ width: 60, height: 60, marginRight: 2, marginTop: 2, marginLeft: 2, display: 'flex', alignItems: 'center' }}
+                                    image={`http://localhost:8081/images/${data.image}`}
+                                    title={data.title}
+                                />
+                                <CardContent>
+                                    <Typography variant="h6" component="div">
+                                        {data.title}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {data.price}
+                                    </Typography>
+                                </CardContent>
+                                <IconButton
+                                        edge="end"
+                                        aria-label="delete"
+                                        sx={{
+                                            marginLeft: 'auto', marginRight: 2,
+                                            '&:hover': {
+                                                '& .MuiSvgIcon-root': {
+                                                    fill: 'blue', // Set the icon color to red on hover
+                                                },
+                                            },
+                                        }}
+                                        onClick={() => handleDeleteItem(data.p_id)} // Assuming there is an id property in your product data
+                                    >
+                                        <RemoveCircleIcon />
+                                    </IconButton>
+                            </Card>
                         </Grid>
                     ))}
                 </Grid>
@@ -75,10 +122,44 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
 
 
 function CartPopover({ open, anchorEl, handleClose }) {
-    // Replace the following with your logic to fetch and display cart items
-    const cartItems = ["Item 1", "Item 2", "Item 3"];
+    useEffect(() => {
+        fetchCart();
+    }, []);
+
+    const [cart, setCart] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const fetchCart = async () => {
+        try {
+            const resp = await axios.get('http://localhost:8081/cart');
+            setCart(resp.data);
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleDeleteItem = async (id) => {
+        try {
+            await axios.delete('http://localhost:8081/cartdelete/' + id)
+            console.log('Product deleted successful');
+            fetchCart();
+        }
+        catch (err) {
+            console.log('Error deleting product !', err);
+        }
+    };
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     return (
+
         <Popover
             open={open}
             anchorEl={anchorEl}
@@ -92,19 +173,99 @@ function CartPopover({ open, anchorEl, handleClose }) {
                 horizontal: 'center',
             }}
         >
-            <Box sx={{ p: 2, width: 300 }}>
-                <Typography variant="h6" component="div">
-                    Your Cart Items
+            <Box sx={{ p: 2, width: 300, textAlign: 'center' }}>
+                <Typography variant="h6" component="div"
+                    sx={{
+                        background: 'linear-gradient(to right, #c72092, #6c14d0)',
+                        WebkitBackgroundClip: 'text', color: 'transparent',
+                        fontWeight: 'bold', marginBottom: 2
+                    }}>
+                    YOUR CART PRODUCTS
                 </Typography>
                 <Grid container spacing={2}>
-                    {cartItems.map((item, index) => (
-                        <Grid item xs={12} key={index}>
-                            <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#f5f5f5' }}>
-                                {item}
-                            </Paper>
+                    {cart?.map((data, i) => (
+                        <Grid item xs={12} key={i}>
+                            <Card sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+                                <CardMedia
+                                    sx={{ width: 60, height: 60, marginRight: 2, marginTop: 2, marginLeft: 2, display: 'flex', alignItems: 'center' }}
+                                    image={`http://localhost:8081/images/${data.image}`}
+                                    title={data.title}
+                                />
+                                <CardContent>
+                                    <Typography variant="h6" component="div">
+                                        {data.title}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {data.price}
+                                    </Typography>
+                                </CardContent>
+                                <IconButton
+                                    edge="end"
+                                    aria-label="delete"
+                                    sx={{
+                                        marginLeft: 'auto', marginRight: 2,
+                                        '&:hover': {
+                                            '& .MuiSvgIcon-root': {
+                                                fill: 'red', // Set the icon color to red on hover
+                                            },
+                                        },
+                                    }}
+                                    onClick={() => handleDeleteItem(data.p_id)} // Assuming there is an id property in your product data
+                                >
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Card>
                         </Grid>
                     ))}
                 </Grid>
+                <Button
+                    variant="contained"
+                    onClick={handleOpenModal}
+                    sx={{
+                        marginTop: 2,
+                        mx: 'auto',
+                        display: 'flex',
+                        alignItems: 'center',
+                        background: 'linear-gradient(to right, #c72092, #6c14d0)',
+                        color: '#ffff',
+                        width: '100%'
+                    }}
+                >
+                    PROCEED TO BUY
+                </Button>
+
+                <Modal
+                    open={isModalOpen}
+                    onClose={handleCloseModal}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: 400,
+                        bgcolor: 'background.paper',
+                        border: '2px solid #000',
+                        boxShadow: 24,
+                        p: 4,
+                    }}>
+
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Confirm Purchase
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            Are you sure you want to proceed with the purchase?
+                        </Typography>
+                        <Button onClick={handleCloseModal} sx={{ mt: 2 }}>
+                            Cancel
+                        </Button>
+                        <Button onClick={() => { handleCloseModal(); }} sx={{ mt: 2 }}>
+                            Confirm
+                        </Button>
+                    </Box>
+                </Modal>
             </Box>
         </Popover>
     );
@@ -254,46 +415,46 @@ function Header() {
                                 Home
                             </Typography>
                         </Button>
-                        <Button onClick={() => { navigate("/products") }} 
-                        sx={{
-                            my: 2, color: 'black', display: 'block',
-                            '&:hover': {
-                                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                                '& .MuiTypography-root': {
-                                    color: '#c72092 ',
+                        <Button onClick={() => { navigate("/products") }}
+                            sx={{
+                                my: 2, color: 'black', display: 'block',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                                    '& .MuiTypography-root': {
+                                        color: '#c72092 ',
+                                    },
                                 },
-                            },
-                            marginRight: '20px'
-                        }}>
+                                marginRight: '20px'
+                            }}>
                             <Typography variant="body1" >
                                 Products
                             </Typography>
                         </Button>
                         <Button onClick={() => { navigate("/aboutUs") }}
-                        sx={{
-                            my: 2, color: 'black', display: 'block',
-                            '&:hover': {
-                                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                                '& .MuiTypography-root': {
-                                    color: '#c72092 ',
+                            sx={{
+                                my: 2, color: 'black', display: 'block',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                                    '& .MuiTypography-root': {
+                                        color: '#c72092 ',
+                                    },
                                 },
-                            },
-                            marginRight: '20px'
-                        }}>
+                                marginRight: '20px'
+                            }}>
                             <Typography variant="body1" >
                                 About Us
                             </Typography>
                         </Button>
                         <Button onClick={() => { navigate("/contactUs") }}
-                        sx={{
-                            my: 2, color: 'black', display: 'block',
-                            '&:hover': {
-                                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                                '& .MuiTypography-root': {
-                                    color: '#c72092 ',
+                            sx={{
+                                my: 2, color: 'black', display: 'block',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                                    '& .MuiTypography-root': {
+                                        color: '#c72092 ',
+                                    },
                                 },
-                            },
-                        }}>
+                            }}>
                             <Typography variant="body1" >
                                 Contact Us
                             </Typography>
@@ -312,7 +473,7 @@ function Header() {
                                     },
                                 },
                             }} onClick={handleOpenWishlistPopover}>
-                                <FavoriteIcon sx={{ color: 'black'}} />
+                                <FavoriteIcon sx={{ color: 'black' }} />
                             </IconButton>
                         </Tooltip>
 
@@ -329,7 +490,7 @@ function Header() {
                                     },
                                 },
                             }} onClick={handleOpenCartPopover}>
-                                <ShoppingCartIcon sx={{ color: 'black'}} />
+                                <ShoppingCartIcon sx={{ color: 'black' }} />
                             </IconButton>
                         </Tooltip>
 
