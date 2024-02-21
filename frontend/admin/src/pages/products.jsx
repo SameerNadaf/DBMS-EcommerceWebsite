@@ -270,7 +270,7 @@ function Products() {
                     />
                     <label htmlFor="image">
                       <Button
-                        component="label"
+                        component="image"
                         role={undefined}
                         variant="contained"
                         tabIndex={-1}
