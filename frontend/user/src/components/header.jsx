@@ -22,8 +22,7 @@ import CardMedia from '@mui/material/CardMedia';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Modal from '@mui/material/Modal';
-import Paper from '@mui/material/Paper';
-
+import TextField from '@mui/material/TextField';
 
 
 function WishlistPopover({ open, anchorEl, handleClose }) {
@@ -44,7 +43,7 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
         }
     };
 
-    const handleDeleteItem = async (id) => {
+    const handleRemoveItem = async (id) => {
         try {
             await axios.delete('http://localhost:8081/wishlistdelete/' + id)
             console.log('Product deleted successful');
@@ -98,16 +97,16 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                                 </CardContent>
                                 <IconButton
                                         edge="end"
-                                        aria-label="delete"
+                                        aria-label="Remove"
                                         sx={{
                                             marginLeft: 'auto', marginRight: 2,
                                             '&:hover': {
                                                 '& .MuiSvgIcon-root': {
-                                                    fill: 'blue', // Set the icon color to red on hover
+                                                    fill: 'blue',
                                                 },
                                             },
                                         }}
-                                        onClick={() => handleDeleteItem(data.p_id)} // Assuming there is an id property in your product data
+                                        onClick={() => handleRemoveItem(data.p_id)}
                                     >
                                         <RemoveCircleIcon />
                                     </IconButton>
@@ -158,6 +157,25 @@ function CartPopover({ open, anchorEl, handleClose }) {
         setIsModalOpen(false);
     };
 
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        address: '',
+      });
+    
+      const handleInputChange = (e) => {
+        setFormData({
+          ...formData,
+          [e.target.name]: e.target.value,
+        });
+      };
+    
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission logic, e.g., send data to server
+        // You can access the form data from the 'formData' state
+      };
+
     return (
 
         <Popover
@@ -206,11 +224,11 @@ function CartPopover({ open, anchorEl, handleClose }) {
                                         marginLeft: 'auto', marginRight: 2,
                                         '&:hover': {
                                             '& .MuiSvgIcon-root': {
-                                                fill: 'red', // Set the icon color to red on hover
+                                                fill: 'red',
                                             },
                                         },
                                     }}
-                                    onClick={() => handleDeleteItem(data.p_id)} // Assuming there is an id property in your product data
+                                    onClick={() => handleDeleteItem(data.p_id)}
                                 >
                                     <DeleteIcon />
                                 </IconButton>
@@ -234,37 +252,83 @@ function CartPopover({ open, anchorEl, handleClose }) {
                     PROCEED TO BUY
                 </Button>
 
-                <Modal
-                    open={isModalOpen}
-                    onClose={handleCloseModal}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: 400,
-                        bgcolor: 'background.paper',
-                        border: '2px solid #000',
-                        boxShadow: 24,
-                        p: 4,
-                    }}>
+                <Modal open={isModalOpen} onClose={handleCloseModal}>
+                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+                     padding: '20px', maxWidth: '400px', backgroundColor: 'white', border: '2px solid #000', textAlign: 'center' }}>
+                        <Typography variant="h6" component="div"
+                            sx={{
+                                background: 'linear-gradient(to right, #c72092, #6c14d0)',
+                                WebkitBackgroundClip: 'text', color: 'transparent',
+                                fontWeight: 'bold', marginBottom: 2
+                            }}>
+                            CART PRODUCTS
+                        </Typography>
 
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Confirm Purchase
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            Are you sure you want to proceed with the purchase?
-                        </Typography>
-                        <Button onClick={handleCloseModal} sx={{ mt: 2 }}>
-                            Cancel
-                        </Button>
-                        <Button onClick={() => { handleCloseModal(); }} sx={{ mt: 2 }}>
-                            Confirm
-                        </Button>
-                    </Box>
+                        <Grid container spacing={2}>
+                            {cart?.map((product) => (
+                                <Grid item key={product.id} xs={12} sm={3}>
+                                    {product.image && <img src={`http://localhost:8081/images/${product.image}`}
+                                        alt="Product Image" style={{ width: '50px', height: '50px' }} />}
+                                </Grid>
+                            ))}
+                        </Grid>
+
+                        <form onSubmit={handleSubmit}>
+                            <TextField
+                                label="Name"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleInputChange}
+                            />
+
+                            <TextField
+                                label="Email"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                            />
+
+                            <TextField
+                                label="Address"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                                name="address"
+                                value={formData.address}
+                                onChange={handleInputChange}
+                            />
+
+                            <Grid container spacing={2}>
+                                <Grid item xs={6}>
+                                    <Button onClick={handleCloseModal} variant="contained"
+                                        sx={{
+                                            mt: 2, width: '100%',
+                                            backgroundColor: theme => theme.palette.error.main,
+                                            '&:hover': { backgroundColor: '#ff0000' }
+                                        }}>
+                                        Close
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Button type="submit" variant="contained"
+                                        sx={{
+                                            mt: 2, width: '100%',
+                                            backgroundColor: theme => theme.palette.success.main,
+                                            '&:hover': { backgroundColor: '#00cc00' }
+                                        }}>
+                                        Place Order
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </div>
                 </Modal>
             </Box>
         </Popover>
@@ -519,11 +583,12 @@ function Header() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
+                
+                            <MenuItem onClick={() => { navigate("/account") }}>
+                                <Typography textAlign="center">Account</Typography>
+                            </MenuItem>
                             <MenuItem onClick={() => { navigate("/signin") }}>
                                 <Typography textAlign="center">Login</Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center">Account</Typography>
                             </MenuItem>
                             <MenuItem onClick={() => { navigate("/signup") }}>
                                 <Typography textAlign="center">Logout</Typography>

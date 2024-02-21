@@ -55,11 +55,11 @@ function Products() {
     const handleAddToCart = async (id) => {
         try {
             await axios.post('http://localhost:8081/addtocart/' + id)
-            console.log('Product deleted successful');
-
+            console.log('Product added successful');
+            toast.success('Product added to cart');
         }
         catch (err) {
-            console.log('Error deleting product !', err);
+            console.log('Error adding product !', err);
         }
 
     };
@@ -67,7 +67,8 @@ function Products() {
     const handleAddToWish = async (id) => {
         try {
             await axios.post('http://localhost:8081/addtowishlist/' + id)
-            console.log('Product deleted successful');
+            console.log('Product added successful');
+            toast.success('Product added to wishlist');
             
         }
         catch (err) {

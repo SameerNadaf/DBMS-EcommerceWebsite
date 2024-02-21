@@ -21,6 +21,19 @@ import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 const style = {
   position: 'absolute',
@@ -257,17 +270,15 @@ function Products() {
                     />
                     <label htmlFor="image">
                       <Button
+                        component="label"
+                        role={undefined}
                         variant="contained"
-                        component="span"
-                        fullWidth
-                        sx={{
-                          mt: 2,
-                          py: 1,
-                          backgroundColor: '#2f2f2f',
-                          color: '#ECEFF1',
-                        }}
+                        tabIndex={-1}
+                        startIcon={<CloudUploadIcon />}
+                        sx={{width: '100%'}}
                       >
-                        {image ? image.name : 'Upload Image'}
+                        Upload file
+                        <VisuallyHiddenInput type="file" />
                       </Button>
                     </label>
                   </Grid>
@@ -277,7 +288,7 @@ function Products() {
                   <Grid item xs={6}>
                     <Button onClick={handleClose} variant="contained"
                       sx={{
-                        mt: 3, width: '100%',
+                        mt: 2, width: '100%',
                         backgroundColor: theme => theme.palette.error.main,
                         '&:hover': { backgroundColor: '#ff0000' }
                       }}>
@@ -287,7 +298,7 @@ function Products() {
                   <Grid item xs={6}>
                     <Button type="submit" variant="contained"
                       sx={{
-                        mt: 3, width: '100%',
+                        mt: 2, width: '100%',
                         backgroundColor: theme => theme.palette.success.main,
                         '&:hover': { backgroundColor: '#00cc00' }
                       }}>
