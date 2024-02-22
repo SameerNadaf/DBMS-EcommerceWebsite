@@ -36,6 +36,14 @@ section .main .main_content .main_text h1{
     left: 5%;
 }
 
+.orderText{
+    font-size: 30px;
+    font-family: pyxidium quick;
+    background: linear-gradient(to right, #c72092,#6c14d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 section .main .main_content .main_text h1 span{
     font-size: 60px;
     background: linear-gradient(to right, #c72092,#6c14d0);

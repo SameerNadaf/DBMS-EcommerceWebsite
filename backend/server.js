@@ -561,6 +561,44 @@ app.delete('/clearCart', (req, res) => {
     });
 });
 
+//Orders query
+app.get('/getOrders', (req, res) => {
+
+    const sql = `
+    SELECT products.*
+    FROM orders
+    JOIN products ON orders.product_id = products.p_id;
+    `;
+
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'No cart products found' });
+        }
+
+        return res.send(result);
+    });
+});
+
+// Add to payments
+app.post('/addtopayments', (req, res) => {
+    const { currentDate, productPrice, type, status } = req.body;
+    console.log('Received request:', req.body);
+
+    const sql = "INSERT INTO payments (type, date, amount, status) VALUES (?, ?, ?, ?)";
+    
+    db.query(sql, [ type, currentDate, productPrice, status], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
 
 
 

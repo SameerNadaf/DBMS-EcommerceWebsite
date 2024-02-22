@@ -24,9 +24,10 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Modal from '@mui/material/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { nanoid } from 'nanoid';
+import Swal from 'sweetalert2';
 
 
-import { nanoid } from 'nanoid'
 function WishlistPopover({ open, anchorEl, handleClose }) {
 
     useEffect(() => {
@@ -79,7 +80,7 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                 horizontal: 'center',
             }}
         >
-            <Box sx={{ p: 2, width: 300, textAlign: 'center' }}>
+            <Box sx={{ p: 2, width: 300 }}>
                 <Typography variant="h6" component="div"
                     sx={{
                         background: 'linear-gradient(to right, #c72092, #6c14d0)',
@@ -102,7 +103,7 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                                         {data.title}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        {data.price}
+                                        ₹{data.price}
                                     </Typography>
                                 </CardContent>
                                 <IconButton
@@ -196,15 +197,9 @@ function CartPopover({ open, anchorEl, handleClose }) {
             await axios.post('http://localhost:8081/orders', { orderItems });
 
             console.log('Order placed successfully');
-            toast.success('Order placed successfully', {
-                position:"top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
 
+            successfulOrder();
+            handleClose();
             handleCloseModal();
             clearCart();
         }
@@ -220,6 +215,16 @@ function CartPopover({ open, anchorEl, handleClose }) {
             });
         }
 
+    };
+
+    const successfulOrder = () => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Order placed successfully',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+        });
+        
     };
 
     const clearCart = async () => {
@@ -249,7 +254,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
                     horizontal: 'center',
                 }}
             >
-                <Box sx={{ p: 2, width: 300, textAlign: 'center' }}>
+                <Box sx={{ p: 2, width: 300 }}>
                     <Typography variant="h6" component="div"
                         sx={{
                             background: 'linear-gradient(to right, #c72092, #6c14d0)',
@@ -272,7 +277,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
                                             {data.title}
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary">
-                                            {data.price}
+                                            ₹{data.price}
                                         </Typography>
                                     </CardContent>
                                     <IconButton
