@@ -25,6 +25,7 @@ import Modal from '@mui/material/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 import { nanoid } from 'nanoid'
 function WishlistPopover({ open, anchorEl, handleClose }) {
 
@@ -137,8 +138,6 @@ function CartPopover({ open, anchorEl, handleClose }) {
         fetchCart();
     }, []);
 
-    
-
     const fetchCart = async () => {
         try {
             const resp = await axios.get('http://localhost:8081/cart');
@@ -148,8 +147,6 @@ function CartPopover({ open, anchorEl, handleClose }) {
             console.log(error);
         }
     };
-
-
 
     const handleDeleteItem = async (id) => {
         try {
@@ -208,11 +205,8 @@ function CartPopover({ open, anchorEl, handleClose }) {
                 draggable: true,
             });
 
-            clearCart();
-
-            handleClose();
-
             handleCloseModal();
+            clearCart();
         }
         catch (error) {
             console.log('Error placing order:', error);
@@ -232,8 +226,8 @@ function CartPopover({ open, anchorEl, handleClose }) {
         try {
             await axios.delete('http://localhost:8081/clearCart');
             console.log('Cart cleared');
-          
-            fetchCart();
+            setCart([]);
+
         } catch (error) {
             console.log('Error clearing cart:', error);
         }
