@@ -69,7 +69,6 @@ function Products() {
             await axios.post('http://localhost:8081/addtowishlist/' + id)
             console.log('Product added successful');
             toast.success('Product added to wishlist');
-            
         }
         catch (err) {
             console.log('Error deleting product !', err);

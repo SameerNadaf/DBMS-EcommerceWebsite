@@ -23,6 +23,11 @@
     grid-gap: 25px 0;
 }
 
+#profile{
+    box-shadow: 0 0 8px #6c14d0;
+    border-radius: 5px;
+}
+
 .products .box .card {
     width: 290px;
     height: 440px;
