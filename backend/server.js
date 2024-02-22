@@ -90,7 +90,7 @@ app.get('/productstable', (req, res) => {
 
 //Orders table 
 app.get('/orderstable', (req, res) => {
-    const sql = 'SELECT * ,DATE_FORMAT(date, "%Y-%m-%d") AS orderDate FROM orders';
+    const sql = 'SELECT * ,DATE_FORMAT(date, "%Y-%m-%d") AS orderDate FROM orders ORDER BY date';
     db.query(sql, (err, result) => {
         if (err) {
             console.error(err);
@@ -520,6 +520,40 @@ app.delete('/wishlistdelete/:id', (req, res) => {
     const id = req.params.id;
  
     db.query(sql, [id], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+//Place order
+app.post('/orders', (req, res) => {
+    const orderItems = req.body.orderItems;
+    console.log('Received request:', req.body);
+
+    if (orderItems && Array.isArray(orderItems) && orderItems.length > 0) {
+        const values = orderItems.map(item => [item.product_id, item.price, item.orderDate]);
+
+        db.query('INSERT INTO orders (product_id, price, date) VALUES ?', [values], (err) => {
+            if (err) {
+                console.error('Error placing order:', err);
+                res.status(500).json({ error: 'Internal Server Error' });
+            } else {
+                res.json({ message: 'Order placed successfully' });
+            }
+        });
+    } else {
+        res.status(400).json({ error: 'Invalid order format' });
+    }
+});
+
+//Clear Cart on successful order
+app.delete('/clearCart', (req, res) => {
+    const sql = 'DELETE FROM cart';
+    const id = req.params.id;
+ 
+    db.query(sql, (err, data) => {
         if (err) {
             return res.json(err);
         }

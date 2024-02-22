@@ -7,7 +7,7 @@ function AboutUs() {
     return (
         <>
         <Header/>
-            <div class="about_text">
+            <div className="about_text">
 
                 <h1>About<span>Footwear</span></h1>
 
