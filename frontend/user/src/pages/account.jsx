@@ -99,7 +99,7 @@ function Account() {
               <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }} >
                 USER
               </Typography>
-              <Typography variant="body2" component="div" sx={{ color: "#ccd1d1" }} >
+              <Typography variant="body1" component="div" sx={{ color: "#acb1b1" }} >
                 user@gmail.com
               </Typography>
             </CardContent>

@@ -5,6 +5,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -66,6 +67,11 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
 
     };
 
+    const handleRefreshWish = async () => {
+        console.log('refresh');
+        fetchWish();
+    };
+
     return (
         <Popover
             open={open}
@@ -81,18 +87,30 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
             }}
         >
             <Box sx={{ p: 2, width: 300 }}>
-                <Typography variant="h6" component="div"
+                <Typography
+                    variant="h6"
+                    component="div"
                     sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
                         background: 'linear-gradient(to right, #c72092, #6c14d0)',
-                        WebkitBackgroundClip: 'text', color: 'transparent',
-                        fontWeight: 'bold', marginBottom: 2
-                    }}>
-                    YOUR WISHLIST PRODUCTS
+                        WebkitBackgroundClip: 'text',
+                        color: 'transparent',
+                        fontWeight: 'bold',
+                        marginBottom: 2,
+                    }}
+                >
+                    <span>WISHLIST PRODUCTS</span>
+                    <IconButton onClick={() => handleRefreshWish()}>
+                        <RefreshIcon />
+                    </IconButton>
                 </Typography>
+
                 <Grid container spacing={2}>
                     {wish?.map((data) => (
                         <Grid item xs={12} key={nanoid()}>
-                            <Card sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+                            <Card sx={{ display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center' }}>
                                 <CardMedia
                                     sx={{ width: 60, height: 60, marginRight: 2, marginTop: 2, marginLeft: 2, display: 'flex', alignItems: 'center' }}
                                     image={`http://localhost:8081/images/${data.image}`}
@@ -110,10 +128,12 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                                     edge="end"
                                     aria-label="Remove"
                                     sx={{
-                                        marginLeft: 'auto', marginRight: 2,
+                                        marginLeft: 'auto',
+                                        marginRight: 2,
+                                        height: 'auto',
                                         '&:hover': {
                                             '& .MuiSvgIcon-root': {
-                                                fill: 'blue',
+                                                fill: 'red',
                                             },
                                         },
                                     }}
@@ -238,6 +258,11 @@ function CartPopover({ open, anchorEl, handleClose }) {
         }
     };
 
+    const handleRefreshCart = async () => {
+        console.log('refresh');
+        fetchCart();
+    };
+
     return (
 
         <>
@@ -255,18 +280,29 @@ function CartPopover({ open, anchorEl, handleClose }) {
                 }}
             >
                 <Box sx={{ p: 2, width: 300 }}>
-                    <Typography variant="h6" component="div"
+                    <Typography
+                        variant="h6"
+                        component="div"
                         sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
                             background: 'linear-gradient(to right, #c72092, #6c14d0)',
-                            WebkitBackgroundClip: 'text', color: 'transparent',
-                            fontWeight: 'bold', marginBottom: 2
-                        }}>
-                        YOUR CART PRODUCTS
+                            WebkitBackgroundClip: 'text',
+                            color: 'transparent',
+                            fontWeight: 'bold',
+                            marginBottom: 2,
+                        }}
+                    >
+                        <span>YOUR CART PRODUCTS</span>
+                        <IconButton onClick={() => handleRefreshCart()}>
+                            <RefreshIcon />
+                        </IconButton>
                     </Typography>
                     <Grid container spacing={2}>
                         {cart?.map((data) => (
                             <Grid item xs={12} key={nanoid()}>
-                                <Card sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+                                <Card sx={{ display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center' }}>
                                     <CardMedia
                                         sx={{ width: 60, height: 60, margin: 2, display: 'flex', alignItems: 'center' }}
                                         image={`http://localhost:8081/images/${data.image}`}
@@ -284,7 +320,9 @@ function CartPopover({ open, anchorEl, handleClose }) {
                                         edge="end"
                                         aria-label="delete"
                                         sx={{
-                                            marginLeft: 'auto', marginRight: 2,
+                                            marginLeft: 'auto',
+                                            marginRight: 2,
+                                            height: 'auto',
                                             '&:hover': {
                                                 '& .MuiSvgIcon-root': {
                                                     fill: 'red',
