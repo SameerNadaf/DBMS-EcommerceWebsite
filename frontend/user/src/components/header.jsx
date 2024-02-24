@@ -86,7 +86,7 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                 horizontal: 'center',
             }}
         >
-            <Box sx={{ p: 2, width: 300 }}>
+            <Box sx={{ p: 2, width: 320 }}>
                 <Typography
                     variant="h6"
                     component="div"
@@ -99,6 +99,8 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                         color: 'transparent',
                         fontWeight: 'bold',
                         marginBottom: 2,
+                        fontFamily: 'Book Antiqua',
+                        fontSize: 22
                     }}
                 >
                     <span>WISHLIST PRODUCTS</span>
@@ -107,10 +109,11 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                     </IconButton>
                 </Typography>
 
+                <div style={{ marginTop: '0px', overflow: 'auto', maxHeight: '400px' }}>
                 <Grid container spacing={2}>
                     {wish?.map((data) => (
                         <Grid item xs={12} key={nanoid()}>
-                            <Card sx={{ display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center' }}>
+                            <Card sx={{ display: 'flex', flexDirection: 'row', width: '96%', alignItems: 'center' }}>
                                 <CardMedia
                                     sx={{ width: 60, height: 60, marginRight: 2, marginTop: 2, marginLeft: 2, display: 'flex', alignItems: 'center' }}
                                     image={`http://localhost:8081/images/${data.image}`}
@@ -145,6 +148,7 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                         </Grid>
                     ))}
                 </Grid>
+                </div>
             </Box>
         </Popover>
     );
@@ -279,7 +283,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
                     horizontal: 'center',
                 }}
             >
-                <Box sx={{ p: 2, width: 300 }}>
+                <Box sx={{ p: 2, width: 320 }}>
                     <Typography
                         variant="h6"
                         component="div"
@@ -292,6 +296,8 @@ function CartPopover({ open, anchorEl, handleClose }) {
                             color: 'transparent',
                             fontWeight: 'bold',
                             marginBottom: 2,
+                            fontFamily: 'Book Antiqua',
+                            fontSize: 22
                         }}
                     >
                         <span>YOUR CART PRODUCTS</span>
@@ -299,10 +305,12 @@ function CartPopover({ open, anchorEl, handleClose }) {
                             <RefreshIcon />
                         </IconButton>
                     </Typography>
+
+                    <div style={{ marginTop: '0px', overflow: 'auto', maxHeight: '420px' }}>
                     <Grid container spacing={2}>
                         {cart?.map((data) => (
                             <Grid item xs={12} key={nanoid()}>
-                                <Card sx={{ display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center' }}>
+                                <Card sx={{ display: 'flex', flexDirection: 'row', width: '96%', alignItems: 'center' }}>
                                     <CardMedia
                                         sx={{ width: 60, height: 60, margin: 2, display: 'flex', alignItems: 'center' }}
                                         image={`http://localhost:8081/images/${data.image}`}
@@ -337,6 +345,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
                             </Grid>
                         ))}
                     </Grid>
+                    </div>
                     <Button
                         variant="contained"
                         onClick={handleOpenModal}
