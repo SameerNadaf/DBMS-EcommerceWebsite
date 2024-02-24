@@ -93,7 +93,7 @@ function Products() {
 
             <Header />
 
-            <div className="products" id="kidsShoes">
+            <div className="products" id="kidsShoes" style={{marginTop: '50px'}}>
                 <h1>Mens Shoes</h1>
 
                 <Grid container spacing={2}>

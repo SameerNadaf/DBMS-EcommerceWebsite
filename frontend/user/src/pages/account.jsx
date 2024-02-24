@@ -10,6 +10,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,21 +38,21 @@ function Account() {
   };
 
   const handlePayNow = async (orderId) => {
-  
+
     try {
       const selectedOrder = order.find((o) => o.p_id === orderId);
       const currentDate = new Date().toISOString();
       const productPrice = selectedOrder.price;
       const type = 'online';
       const status = 'paid';
-  
+
       const paymentResponse = await axios.post('http://localhost:8081/addtopayments', {
         currentDate,
         productPrice,
         type,
         status,
       });
-  
+
       console.log('Payment successful', paymentResponse.data);
       await Swal.fire({
         icon: 'success',
@@ -57,7 +60,7 @@ function Account() {
         showConfirmButton: true,
         confirmButtonText: 'OK',
       });
-    } 
+    }
     catch (err) {
       console.log('Error in payment!', err);
       toast.error('Error in payment!', {
@@ -71,6 +74,16 @@ function Account() {
     }
   }
 
+  const showAlert = () => {
+  
+    Swal.fire({
+      title: 'Under Construction',
+      html: '<div style="color: green;">This feature is currently under construction</div>',
+      icon: 'info',
+      confirmButtonText: 'OK',
+    });
+  };
+
 
   return (
     <>
@@ -82,13 +95,13 @@ function Account() {
             <CardMedia
               component="img"
               alt="Profile Pic"
-              image="/image/user.png"
+              image="/image/us.png"
               sx={{
                 height: 150,
                 width: 150,
                 borderRadius: '50%',
                 margin: 'auto',
-                marginTop: 5,
+                marginTop:5,
                 marginBottom: 4
               }}
             />
@@ -96,45 +109,60 @@ function Account() {
             <Divider variant="middle" sx={{ width: '80%', margin: '12px auto' }} />
 
             <CardContent sx={{ textAlign: 'center' }}>
-              <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }} >
+              <Typography variant="h6" component="div" sx={{ fontFamily: 'Calibri', color: '#2c3e50', fontWeight: 'bold' }} >
                 USER
               </Typography>
-              <Typography variant="body1" component="div" sx={{ color: "#acb1b1" }} >
+              <Typography variant="body1" component="div" sx={{ color: "#3498db", fontFamily: 'Calibri', fontSize: '18px'}} >
                 user@gmail.com
               </Typography>
             </CardContent>
 
             <Divider variant="middle" sx={{ width: '80%', margin: '12px auto' }} />
 
-            <CardContent sx={{ textAlign: 'center' }}>
-              <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
-                ORDERS
+            <CardContent sx={{ display: 'flex', alignItems: 'center', 
+            justifyContent: 'center', textAlign: 'center',
+            cursor: 'pointer'
+           }} 
+            onClick={() => showAlert()} >
+              <NotificationsNoneIcon sx={{ fontSize: 29, mr: 2 }} />
+              <Typography variant="h6" component="div" sx={{fontFamily: 'Book Antiqua', fontWeight: 'bold' }}>
+                NOTIFICATIONS
               </Typography>
             </CardContent>
 
             <Divider variant="middle" sx={{ width: '80%', margin: '12px auto' }} />
 
-            <CardContent sx={{ textAlign: 'center' }}>
-              <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
-                CART
+            <CardContent sx={{ display: 'flex', alignItems: 'center', 
+            justifyContent: 'center', textAlign: 'center',
+            cursor: 'pointer'
+             }}
+             onClick={() => showAlert()} >
+              <LocalOfferOutlinedIcon sx={{ fontSize: 29, mr: 2 }} />
+              <Typography variant="h6" component="div" sx={{ fontFamily: 'Book Antiqua', fontWeight: 'bold' }}>
+                NEW SALE OFFER
               </Typography>
             </CardContent>
 
             <Divider variant="middle" sx={{ width: '80%', margin: '12px auto' }} />
 
-            <CardContent sx={{ textAlign: 'center' }}>
-              <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
-                WISHLIST
+            <CardContent sx={{ display: 'flex', alignItems: 'center', 
+            justifyContent: 'center', textAlign: 'center',
+            cursor: 'pointer'
+             }}
+             onClick={() => showAlert()} >
+              <SettingsOutlinedIcon sx={{ fontSize: 29, mr: 2 }} />
+              <Typography variant="h6" component="div" sx={{ fontFamily: 'Book Antiqua', fontWeight: 'bold' }}>
+                PROFILE SETTING
               </Typography>
             </CardContent>
 
             <Divider variant="middle" sx={{ width: '80%', margin: '12px auto' }} />
 
             <CardActions sx={{ justifyContent: 'center', pb: 3 }}>
-              <Button size="small" variant="outlined" color="primary">
+              <Button size="small" variant="outlined" color="primary" onClick={() => showAlert()}>
                 Share Profile
               </Button>
-              <Button size="small" variant="outlined" color="primary">
+              <Button size="small" variant="outlined" color="primary" onClick={() => showAlert()}>
                 Learn More
               </Button>
             </CardActions>
@@ -170,7 +198,7 @@ function Account() {
                 </div>
                 <div style={{}}>
                   <CardActions>
-                    <Button size="small" variant="outlined" color="primary" onClick={ () => handlePayNow(data.p_id)}>
+                    <Button size="small" variant="outlined" color="primary" onClick={() => handlePayNow(data.p_id)}>
                       Pay Now
                     </Button>
                   </CardActions>

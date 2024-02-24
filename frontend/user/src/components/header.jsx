@@ -99,6 +99,8 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                         color: 'transparent',
                         fontWeight: 'bold',
                         marginBottom: 2,
+                        fontFamily: 'Book Antiqua',
+                        fontSize: 22
                     }}
                 >
                     <span>WISHLIST PRODUCTS</span>
@@ -294,6 +296,8 @@ function CartPopover({ open, anchorEl, handleClose }) {
                             color: 'transparent',
                             fontWeight: 'bold',
                             marginBottom: 2,
+                            fontFamily: 'Book Antiqua',
+                            fontSize: 22
                         }}
                     >
                         <span>YOUR CART PRODUCTS</span>
