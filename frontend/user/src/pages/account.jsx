@@ -95,7 +95,7 @@ function Account() {
             <CardMedia
               component="img"
               alt="Profile Pic"
-              image="/image/us.png"
+              image="/image/user.png"
               sx={{
                 height: 150,
                 width: 150,
