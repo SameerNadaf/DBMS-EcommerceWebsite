@@ -3,56 +3,57 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import '../styles.css';
 
+
 function AboutUs() {
     return (
         <>
-        <Header/>
+            <Header />
             <div className="about_text">
 
-                <h1>About<span>Footwear</span></h1>
+                <h1>About<span>US</span></h1>
 
-                <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores nihil illum pariatur quibusdam explicabo
-                    assumenda saepe, laborum, animi voluptates doloremque vero et asperiores ratione quam deserunt quisquam
-                    ducimus perspiciatis accusamus! Tempora blanditiis laudantium eligendi aliquid voluptatibus molestias velit,
-                    eos itaque, nihil voluptatum rerum suscipit. In ea, corporis accusamus sunt dolores nihil. Dolorum, fugiat
-                    natus! Recusandae, corrupti nulla odit praesentium iusto iste consectetur exercitationem sequi magni eum
-                    quod accusantium quam culpa quos, cumque inventore in ab sed tempore itaque nesciunt similique aliquam
-                    repudiandae! Nobis, voluptatibus quod! Illo delectus quo, quis nam sed nulla nihil, veritatis sint
-                    asperiores ullam temporibus quisquam. Ipsa cumque quasi distinctio! Architecto harum laborum quas reiciendis
-                    optio repellat amet atque inventore voluptatum natus, nam neque tempore ex corporis exercitationem
-                    blanditiis ea. Ex dolores illum esse reprehenderit fugit id, qui officia omnis sequi ipsam? Voluptatem nam
-                    repudiandae corporis maxime distinctio ea quibusdam at rem officia provident. Voluptatem provident
-                    necessitatibus ut quam libero laudantium aspernatur dolor, totam quis odit labore, vel nihil maxime
-                    laboriosam inventore nobis dignissimos iste in dicta quae delectus facere explicabo facilis? Id perferendis
-                    exercitationem voluptas ipsam perspiciatis dolor, qui, totam quidem nobis inventore pariatur debitis. Beatae
-                    ipsum tempore dolorum quam obcaecati repellat fuga voluptatibus consequatur accusantium aperiam accusamus
-                    molestiae nam, eum saepe ex voluptatem ratione soluta pariatur quos ab iure? Ipsa fugit impedit sunt.
-                    Incidunt dolore, molestiae distinctio fuga blanditiis soluta rem, numquam, nihil fugit atque hic. Culpa
-                    excepturi debitis quaerat repudiandae nisi facilis eveniet quae dolore quasi doloribus nemo voluptatibus nam
-                    voluptas similique quas modi asperiores, molestiae facere alias, atque, accusamus voluptatum? Ipsum ullam
-                    tempore quo facilis perferendis dicta at! Quas beatae, quod ducimus consequatur explicabo modi molestiae
-                    fugit at corporis velit sint vitae molestias delectus id cupiditate architecto dolore recusandae
-                    consectetur, eligendi pariatur maxime reprehenderit? Eos, iure? Rerum, sit doloribus unde, doloremque
-                    numquam error iusto saepe natus beatae quaerat harum a laboriosam amet eius sapiente dolorum architecto
-                    commodi labore. Omnis quas voluptas reiciendis quisquam atque eaque? Commodi, sunt! Voluptatum iste nisi
-                    iure repellat deserunt commodi tenetur doloribus. Ratione est voluptatibus ipsam voluptates vero delectus
-                    officia? Hic ut itaque voluptatibus eos delectus! In harum ea atque libero repellendus blanditiis nemo
-                    adipisci, eveniet fugit ducimus quae facere? Necessitatibus porro fugit perferendis, a illum, maxime
-                    suscipit placeat deserunt maiores modi sequi magni consectetur nostrum quidem ex nulla! Temporibus nam
-                    numquam veniam nesciunt saepe voluptas ad amet exercitationem eum commodi necessitatibus harum non
-                    recusandae vitae aliquid, quis adipisci voluptates. Error enim praesentium quo aliquam ut reiciendis! Et
-                    ullam obcaecati, molestiae expedita veritatis dolores unde vel, blanditiis maxime necessitatibus natus
-                    beatae vero distinctio adipisci assumenda? Minus provident perferendis hic fugiat harum. Voluptate laborum
-                    vel quo, illum, maxime rem esse deleniti provident distinctio accusamus ducimus ipsam architecto! Eligendi
-                    eum, architecto repudiandae quasi dolorum iste, hic, officia iusto temporibus quae dolores explicabo saepe
-                    eius recusandae obcaecati totam quia quo error. Illo iusto laudantium reiciendis magni vel perferendis cum
-                    ullam ut pariatur non fuga dignissimos amet nesciunt, minus eos perspiciatis dolores magnam? Numquam
-                    possimus ipsa voluptates magni porro voluptatem, totam provident voluptas?
+                <p style={{ textAlign: 'justify' }}>
+                    Welcome to Footwear, where the journey begins for those who appreciate footwear as more than just an accessory.
+                    Step into a world of unparalleled style and comfort, where each pair of shoes is a testament to our commitment to
+                    your satisfaction.
+
+                    Our collection is a carefully curated ensemble of footwear that transcends the ordinary. From cutting-edge designs
+                    that embracethe latest fashion trends to timeless classics that stand the test of time, we cater to individuals with
+                    diverse tastes and preferences.
+
+                    Immerse yourself in the world of possibilities as you explore our shelves adorned with everything from sporty sneakers
+                    that elevate your active lifestyle to chic sandals that effortlessly transition from day to night. Whether you're a
+                    trendsetter, a fitness enthusiast, or someone who appreciates laid-back elegance, our extensive range has something
+                    special for you.<br /><br />
+
+                    At Footwear, we believe that comfort is the cornerstone of true style. Our shoes are not just about aesthetics; they
+                    are engineered to provide the perfect fit, ensuring that every step you take is a step towards comfort and confidence.
+                    Walk with ease, knowing that your footwear is designed with your well-being in mind.Our knowledgeable and friendly
+                    staff is here to assist you in finding the perfect pair that suits your needs. With personalized fitting sessions and
+                    expert advice, we ensure that you leave our store feeling confident and satisfied. We believe that finding the right
+                    shoe should be an enjoyable experience, and we're here to make that happen for you.
+
+                    We pride ourselves on our commitment to craftsmanship, collaborating with brands that share our dedication to
+                    excellence. Each pair in our store tells a story of meticulous artistry, quality materials, and a passion for
+                    delivering footwear that goes beyond expectations.<br /><br />
+
+                    Sustainability is at the heart of our mission. We are mindful of our environmental footprint and strive to make
+                    responsible choices in our product selection. Join us in embracing fashion that leaves a positive impact on the world.
+
+                    Our knowledgeable and friendly staff is not just here to sell shoes; we're here to make your shopping experience
+                    exceptional. Whether you're seeking advice on shoe care, the latest fashion tips, or simply want to explore our
+                    collection, we're here to assist you every step of the way.
+
+                    At Footwear, we invite you to not just shop but to experience a harmonious blend of style, comfort, and individuality.
+                    Thank you for choosing us as your preferred destination for footwear – where every pair is a celebration of your
+                    unique journey.<br /><br />
+
+                    Step into a world of possibilities at Footwear, where your style begins and comfort never takes a backseat!
+
                 </p>
 
             </div>
-            <Footer/>
+            <Footer />
 
         </>
     )

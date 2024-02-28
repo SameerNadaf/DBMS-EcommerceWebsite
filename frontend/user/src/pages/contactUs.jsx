@@ -2,6 +2,15 @@ import React from 'react';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import '../styles.css';
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import XIcon from '@mui/icons-material/X';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import EmailIcon from '@mui/icons-material/Email';
+import { Grid, Box, Typography } from '@mui/material';
+import Divider from '@mui/material/Divider';
+
 
 function ContactUs() {
   return (
@@ -9,26 +18,103 @@ function ContactUs() {
       <Header />
       <div className="contact">
 
-        <h1>Contact<span>Us</span></h1>
+        <h1 className='h1'>Contact<span>Us</span></h1>
 
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam nihil dignissimos, molestias, dolorem
-          fugiat qui dolore aliquam accusamus repellat ea cum pariatur iusto quasi consequatur voluptate inventore
-          voluptas saepe. Maxime quaerat nobis ab veritatis dignissimos quae, eius tempore quis. Voluptatum blanditiis
-          quae quas explicabo magni sequi corrupti eos distinctio iusto officia, quod aspernatur dolores laborum velit
-          esse eveniet hic error facere quaerat tempore et facilis molestiae nobis dolor! Eius laboriosam soluta
-          nostrum, dolores in iste sint repudiandae perferendis aspernatur nesciunt ipsam voluptatum quidem id eaque
-          adipisci unde numquam harum quas? Iure sed accusantium deleniti modi molestias, totam tempore nam facere.
-        </p>
+        <Divider variant="middle" sx={{ width: '85%', borderWidth: '1.5px', marginBottom: '15px'}} />
+
+        <h1 className='subh'>We would be happy to assist you with any information you may need</h1>
+
+        <Grid container spacing={4} justifyContent="space-between">
+
+          <Grid item xs={12} sm={4}>
+            <Box className="contact-box" >
+              <PhoneInTalkIcon fontSize="large" 
+              style={{ width: '80px', height: '80px', marginBottom: '20px', marginTop: '20px' }}
+              onMouseOver={(e) => (e.currentTarget.style.color = '#0093FD')}
+              onMouseOut={(e) => (e.currentTarget.style.color = '#000000')} 
+              />
+              <div>
+                <Typography variant='h6' sx={{mb:2, fontFamily: 'Book Antiqua', fontWeight: 'bold'}}>Our Tollfree Number</Typography>
+                <Typography variant='h6'>123 456 7890</Typography>
+              </div>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Box className="contact-box" >
+              <WhatsAppIcon fontSize="large" 
+              style={{ width: '80px', height: '80px', marginBottom: '20px', marginTop: '20px' }}
+              onMouseOver={(e) => (e.currentTarget.style.color = 'green')}
+              onMouseOut={(e) => (e.currentTarget.style.color = '#000000')} 
+              />
+              <div>
+                <Typography variant='h6' sx={{mb:2, fontFamily: 'Book Antiqua', fontWeight: 'bold'}}>Chat Now</Typography>
+                <Typography variant='h6'>98745 63210</Typography>
+              </div>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Box className="contact-box" >
+              <EmailIcon fontSize="large" 
+              style={{ width: '80px', height: '80px', marginBottom: '20px', marginTop: '20px' }}
+              onMouseOver={(e) => (e.currentTarget.style.color = '#EA4335')}
+              onMouseOut={(e) => (e.currentTarget.style.color = '#000000')} 
+              />
+              <div>
+                <Typography variant='h6' sx={{mb:2, fontFamily: 'Book Antiqua', fontWeight: 'bold'}}>Email Us</Typography>
+                <Typography variant='h6'>contact@gmail.com</Typography>
+              </div>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Box className="contact-box" >
+              <FacebookIcon fontSize="large" 
+              style={{ width: '80px', height: '80px', marginBottom: '20px', marginTop: '20px' }}
+              onMouseOver={(e) => (e.currentTarget.style.color = '#006EFD')}
+              onMouseOut={(e) => (e.currentTarget.style.color = '#000000')} 
+              />
+              <div>
+                <Typography variant='h6' sx={{mb:2, fontFamily: 'Book Antiqua', fontWeight: 'bold'}}>Reach Us On</Typography>
+                <Typography variant='h6'>FACEBOOK</Typography>
+              </div>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Box className="contact-box" >
+              <XIcon fontSize="large" 
+              style={{ width: '80px', height: '80px', marginBottom: '20px', marginTop: '20px' }}
+              onMouseOver={(e) => (e.currentTarget.style.color = '#000000')}
+              onMouseOut={(e) => (e.currentTarget.style.color = '#000000')} 
+              />
+              <div>
+                <Typography variant='h6' sx={{mb:2, fontFamily: 'Book Antiqua', fontWeight: 'bold'}}>Reach Us On</Typography>
+                <Typography variant='h6'>X(Prev. Twitter)</Typography>
+              </div>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Box className="contact-box">
+              <InstagramIcon fontSize="large" 
+              style={{ width: '80px', height: '80px', marginBottom: '20px', marginTop: '20px' }}
+              onMouseOver={(e) => (e.currentTarget.style.color = '#FD009F')}
+              onMouseOut={(e) => (e.currentTarget.style.color = '#000000')} 
+              />
+              <div>
+                <Typography variant='h6' sx={{mb:2, fontFamily: 'Book Antiqua', fontWeight: 'bold'}}>Reach Us On</Typography>
+                <Typography variant='h6'>INSTAGRAM</Typography>
+              </div>
+            </Box>
+          </Grid>
+
+        </Grid>
 
       </div>
 
-      <div className="map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122809.84860114464!2d74.42603886189339!3d15.866697517099992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf669f5095362f%3A0x7e34b31edcdefb5f!2sBelagavi%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1706183085906!5m2!1sen!2sin"
-          width="100%" height="500" style={{ border: 0 }} allowFullScreen="" loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+      
       <Footer />
     </>
   )

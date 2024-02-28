@@ -261,8 +261,10 @@ app.post('/addproduct', upload.single('image'), (req, res) => {
 
 //Deleting products from the table
 app.delete('/deleteproduct/:id', (req, res) => {
-    const sql = "DELETE FROM products WHERE p_id = ?";
+
     const id = req.params.id;
+    
+    const sql = "DELETE FROM products WHERE p_id = ?";
  
     db.query(sql, [id], (err, data) => {
         if (err) {

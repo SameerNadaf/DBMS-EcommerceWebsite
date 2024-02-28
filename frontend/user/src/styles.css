@@ -155,7 +155,7 @@ section .main .button:hover i{
 
 /*Contact Us*/
 
-.contact h1{
+.contact .h1{
     font-size: 60px;
     margin-top: 70px;
     display: flex;
@@ -175,44 +175,36 @@ section .main .button:hover i{
 }
 
 .contact {
-    text-align: center; /* Center the text horizontally */
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 80px;
     justify-content: center;
-    margin-bottom: 45px;
 }
 
-.contact p{
-    background: linear-gradient(to left, #c72092 , #6c14d0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 22px;
-    width: 90%;
-    margin-top: 45px;
-    text-align: justify;
-    padding: 25px 30px;
-    border: 2px solid #c72092;
-    border-radius: 20px;
-    box-shadow: 0 0 8px #c72092;
+.contact-box:hover {
+    transform: scale(1.1);
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 0 24px #ccc;
+    transition: transform 0.3s ease-in-out;
+}
+  
+.contact-box {
+    padding: 15px;
+    text-align: center;
+    margin-top: 60px;
+    margin-left: 60px;
+    margin-right: 60px;
 }
 
-.map {
-    text-align: center; /* Center the text horizontally */
+.subh{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 45px;
-}
-
-.map iframe{
-    background: linear-gradient(to left, #c72092 , #6c14d0);
+    text-transform: uppercase;
+    background: linear-gradient(to right, #c72092, #6c14d0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    line-height: 500px;
-    width: 94%;
-    border: 2px solid #6c14d0;
-    border-radius: 20px;
-    box-shadow: 0 0 8px #6c14d0;
 }
