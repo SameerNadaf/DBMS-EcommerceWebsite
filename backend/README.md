@@ -1,3 +1,5 @@
+#API Documentation
+
 # Admin Authentication
 
 ## Admin Login
