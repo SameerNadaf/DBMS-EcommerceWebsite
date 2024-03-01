@@ -15,10 +15,10 @@ function Home (){
                 <div className="main_text">
                     <h1>Footwear<br/><span>Collection</span></h1>
                     <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer took 
-                        a galley of type and scrambled it to make a type specimen book. It has survived not only 
-                        five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                        Welcome to FOOTWEAR, where fashion meets comfort in every step. Explore our extensive collection of premium 
+                        footwear designed to elevate your style and enhance your stride. Whether you're seeking casual sneakers, elegant 
+                        heels, or rugged boots, our curated selection offers a perfect blend of trendsetting designs and unparalleled 
+                        comfort.
                     </p>
                 </div>
                 <div className="main_image">
