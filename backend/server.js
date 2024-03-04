@@ -631,7 +631,7 @@ app.get('/cartCount', (req, res) => {
             console.error(err);
             return res.status(500).json({ error: 'Internal Server Error' });
         }
-
+        
         const totalitems = result[0].total_items || 0;
         return res.json({ totalitems });
     });
