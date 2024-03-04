@@ -245,11 +245,11 @@ function Account() {
                     <Typography variant="h6" component="div" sx={{fontFamily: 'Playfair Display'}}>
                       {data.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body1" color="text.secondary" sx={{fontFamily: 'DM Sans'}}>
                       ₹{data.price}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Order Date: {data.date.substring(0, 10)}
+                    <Typography variant="body1" color="text.secondary" sx={{fontFamily: 'DM Sans'}}>
+                      Order Date : {data.date.substring(0, 10)}
                     </Typography>
                   </CardContent>
                 </div>

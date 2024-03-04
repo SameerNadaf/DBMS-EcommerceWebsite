@@ -570,7 +570,7 @@ app.get('/getOrders', (req, res) => {
     SELECT orders.*, products.*
     FROM orders
     JOIN products ON orders.product_id = products.p_id
-    ORDER BY orders.o_id DESC;
+    ORDER BY orders.date DESC;
     `;
 
     db.query(sql, (err, result) => {
