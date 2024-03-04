@@ -118,3 +118,8 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.swal2-btn-custom{
+    height: 40px;
+    width: 90px;
+}

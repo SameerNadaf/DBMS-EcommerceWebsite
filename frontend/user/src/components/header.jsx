@@ -86,7 +86,7 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                 horizontal: 'center',
             }}
         >
-            <Box sx={{ p: 2, width: 320 }}>
+            <Box sx={{ p: 2, width: 400 }}>
                 <Typography
                     variant="h6"
                     component="div"
@@ -283,7 +283,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
                     horizontal: 'center',
                 }}
             >
-                <Box sx={{ p: 2, width: 320 }}>
+                <Box sx={{ p: 2, width: 400 }}>
                     <Typography
                         variant="h6"
                         component="div"

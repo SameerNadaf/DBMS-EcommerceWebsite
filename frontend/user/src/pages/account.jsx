@@ -37,22 +37,60 @@ function Account() {
     }
   };
 
-  const handlePayNow = async (orderId) => {
+  const confirmPay = async (productId, orderId) => {
+  
+    Swal.fire({
+      title: 'Confirm Payment?',
+      text: 'Are you sure to pay',
+      showCancelButton: true,
+      cancelButtonColor: 'red',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes',
+      confirmButtonColor: 'green',
+      customClass: {
+        confirmButton: 'swal2-btn-custom',
+        cancelButton: 'swal2-btn-custom',
+      },
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        const cancelButton = Swal.getCancelButton();
+    
+        confirmButton.addEventListener('click', () => {
+          handlePayNow(productId, orderId);
+          handleOrder(orderId);
+        });
+    
+        cancelButton.addEventListener('click', () => {
+          Swal.close();
+        });
+      }
+    });
+    
+    
+
+  };
+
+  const handlePayNow = async (productId, orderId) => {
 
     try {
-      const selectedOrder = order.find((o) => o.p_id === orderId);
+      const selectedOrder = order.find((o) => o.p_id === productId);
+      const oId = orderId;
       const currentDate = new Date().toISOString();
       const productPrice = selectedOrder.price;
       const type = 'online';
       const status = 'paid';
 
       const paymentResponse = await axios.post('http://localhost:8081/addtopayments', {
+        oId,
         currentDate,
         productPrice,
         type,
         status,
       });
 
+      fetchOrder();
+
+      console.log('GG');
       console.log('Payment successful', paymentResponse.data);
       await Swal.fire({
         icon: 'success',
@@ -60,6 +98,7 @@ function Account() {
         showConfirmButton: true,
         confirmButtonText: 'OK',
       });
+
     }
     catch (err) {
       console.log('Error in payment!', err);
@@ -71,6 +110,20 @@ function Account() {
         pauseOnHover: true,
         draggable: true,
       });
+    }
+  }
+
+  const handleOrder = async (orderId) => {
+
+    const status = 'paid';
+
+    try {
+      const response = await axios.put('http://localhost:8081/updateOrders/' + orderId,{status});
+      console.log(response.data.message);
+      console.log('gg');
+      fetchOrder();
+    } catch (err) {
+      console.log('Error in payment!', err);
     }
   }
 
@@ -184,7 +237,7 @@ function Account() {
                   component="img"
                   alt={data.title}
                   image={`http://localhost:8081/images/${data.image}`}
-                  sx={{ height: 50, width: 50, marginTop: 1, marginBottom: 1, marginLeft: 5 }}
+                  sx={{ height: 90, width: 80, marginTop: 1, marginBottom: 1, marginLeft: 5 }}
                 />
                 <div style={{ display: 'flex', flexDirection: 'column', width: '73%' }}>
                   <CardContent sx={{ marginLeft: 5 }}>
@@ -194,13 +247,22 @@ function Account() {
                     <Typography variant="body2" color="text.secondary">
                       ₹{data.price}
                     </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Order Date: {data.date.substring(0, 10)}
+                    </Typography>
                   </CardContent>
                 </div>
                 <div style={{}}>
                   <CardActions>
-                    <Button size="small" variant="outlined" color="primary" onClick={() => handlePayNow(data.p_id)}>
-                      Pay Now
-                    </Button>
+                    {data.status === 'paid' ? (
+                      <Button size="small" variant="outlined" disabled >
+                        Pay Now
+                      </Button>
+                    ) : (
+                      <Button size="small" variant="outlined" color="primary" onClick={() => confirmPay(data.p_id, data.o_id)} >
+                        Pay Now
+                      </Button>
+                    )}
                   </CardActions>
                 </div>
               </Card>

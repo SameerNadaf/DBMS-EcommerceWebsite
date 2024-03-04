@@ -535,9 +535,9 @@ app.post('/orders', (req, res) => {
     console.log('Received request:', req.body);
 
     if (orderItems && Array.isArray(orderItems) && orderItems.length > 0) {
-        const values = orderItems.map(item => [item.product_id, item.price, item.orderDate]);
+        const values = orderItems.map(item => [item.product_id, item.price, item.orderDate, 'unpaid']);
 
-        db.query('INSERT INTO orders (product_id, price, date) VALUES ?', [values], (err) => {
+        db.query('INSERT INTO orders (product_id, price, date, status) VALUES ?', [values], (err) => {
             if (err) {
                 console.error('Error placing order:', err);
                 res.status(500).json({ error: 'Internal Server Error' });
@@ -567,9 +567,10 @@ app.delete('/clearCart', (req, res) => {
 app.get('/getOrders', (req, res) => {
 
     const sql = `
-    SELECT products.*
+    SELECT orders.*, products.*
     FROM orders
-    JOIN products ON orders.product_id = products.p_id;
+    JOIN products ON orders.product_id = products.p_id
+    ORDER BY orders.o_id DESC;
     `;
 
     db.query(sql, (err, result) => {
@@ -588,16 +589,37 @@ app.get('/getOrders', (req, res) => {
 
 // Add to payments
 app.post('/addtopayments', (req, res) => {
-    const { currentDate, productPrice, type, status } = req.body;
+    const { oId, currentDate, productPrice, type, status } = req.body;
     console.log('Received request:', req.body);
 
-    const sql = "INSERT INTO payments (type, date, amount, status) VALUES (?, ?, ?, ?)";
+    const sql = "INSERT INTO payments (orderId, type, date, amount, status) VALUES (?, ?, ?, ?, ?)";
     
-    db.query(sql, [ type, currentDate, productPrice, status], (err, data) => {
+    db.query(sql, [ oId, type, currentDate, productPrice, status], (err, data) => {
         if (err) {
             return res.json(err);
         }
         return res.json(data);
+    });
+});
+
+//Onclick of pay now orders table updation(status change)
+app.put('/updateOrders/:orderId', (req, res) => {
+    const orderId = req.params.orderId;
+    const status = req.body.status;
+
+    const sql = 'UPDATE orders SET status = ? WHERE o_id = ?';
+
+    db.query(sql, [status, orderId], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error', message: err.message });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'No orders matched' });
+        }
+
+        return res.json({ message: 'Order updated successfully' });
     });
 });
 
