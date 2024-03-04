@@ -623,6 +623,19 @@ app.put('/updateOrders/:orderId', (req, res) => {
     });
 });
 
+//Query for displaying total number of products in cart
+app.get('/cartCount', (req, res) => {
+    const sql = 'SELECT COUNT(*) AS total_items FROM cart';
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        const totalitems = result[0].total_items || 0;
+        return res.json({ totalitems });
+    });
+});
 
 
 

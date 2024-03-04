@@ -464,6 +464,19 @@ function Header() {
         setCartPopoverOpen(false);
     };
 
+    useEffect(() => { fetchData() }, [])
+
+    const [items, setItems] = useState([])
+    const fetchData = async () => {
+        try {
+            const resp = await axios.get('http://localhost:8081/cartCount')
+            setItems(resp.data)
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
 
     return (
         <>
@@ -609,7 +622,7 @@ function Header() {
 
                     <Box sx={{ flexGrow: 0 }}>
 
-                        <Tooltip title="Open Wishlist">
+                        <Tooltip title="Open Whishlist">
                             <IconButton sx={{
                                 p: 20 + 'px',
                                 '&:hover': {
@@ -625,20 +638,41 @@ function Header() {
 
                         <WishlistPopover open={wishlistPopoverOpen} anchorEl={anchorEl} handleClose={handleCloseWishlistPopover} />
 
-                        <Tooltip title="Open Cart">
-                            <IconButton sx={{
-                                p: 20 + 'px',
-                                '&:hover': {
-                                    backgroundColor: 'transparent',
-                                    '& svg': {
-                                        color: '#c72092',
+                        <Tooltip title={`Open Cart (${items.totalitems} items)`} arrow>
+                            <IconButton
+                                sx={{
+                                    p: 20 + 'px',
+                                    position: 'relative',
+                                    '&:hover': {
+                                        backgroundColor: 'transparent',
+                                        '& svg': {
+                                            color: '#c72092',
+                                        },
                                     },
-                                },
-                            }} onClick={handleOpenCartPopover}>
-                                <ShoppingCartIcon sx={{ color: 'black' }} />
+                                }}
+                                onClick={handleOpenCartPopover}
+                            >
+                                <div style={{ position: 'relative' }}>
+                                    <ShoppingCartIcon sx={{ color: 'black' }} />
+                                    {items.totalitems > 0 && (
+                                        <div
+                                            style={{
+                                                position: 'absolute',
+                                                top: '-25%',
+                                                right: '0%',
+                                                backgroundColor: '#EE5632',
+                                                borderRadius: '50%',
+                                                padding: '2px 6px',
+                                                color: 'white',
+                                                fontSize: '12px',
+                                            }}
+                                        >
+                                            {items.totalitems}
+                                        </div>
+                                    )}
+                                </div>
                             </IconButton>
                         </Tooltip>
-
                         <CartPopover open={cartPopoverOpen} anchorEl={cartAnchorEl} handleClose={handleCloseCartPopover} />
 
                         <Tooltip title="Open settings">
