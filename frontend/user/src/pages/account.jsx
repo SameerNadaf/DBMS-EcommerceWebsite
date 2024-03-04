@@ -42,6 +42,7 @@ function Account() {
     Swal.fire({
       title: 'Confirm Payment?',
       text: 'Are you sure to pay',
+      icon: 'question',
       showCancelButton: true,
       cancelButtonColor: 'red',
       cancelButtonText: 'Cancel',
@@ -162,10 +163,10 @@ function Account() {
             <Divider variant="middle" sx={{ width: '80%', margin: '12px auto' }} />
 
             <CardContent sx={{ textAlign: 'center' }}>
-              <Typography variant="h6" component="div" sx={{ fontFamily: 'Calibri', color: '#2c3e50', fontWeight: 'bold' }} >
+              <Typography variant="h6" component="div" sx={{ fontFamily: 'Playfair Display', color: '#2c3e50', fontWeight: 'bold' }} >
                 USER
               </Typography>
-              <Typography variant="body1" component="div" sx={{ color: "#3498db", fontFamily: 'Calibri', fontSize: '18px'}} >
+              <Typography variant="body1" component="div" sx={{ color: "#3498db", fontFamily: 'Playfair Display', fontSize: '18px'}} >
                 user@gmail.com
               </Typography>
             </CardContent>
@@ -241,7 +242,7 @@ function Account() {
                 />
                 <div style={{ display: 'flex', flexDirection: 'column', width: '73%' }}>
                   <CardContent sx={{ marginLeft: 5 }}>
-                    <Typography variant="h6" component="div">
+                    <Typography variant="h6" component="div" sx={{fontFamily: 'Playfair Display'}}>
                       {data.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">

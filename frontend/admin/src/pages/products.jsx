@@ -40,7 +40,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 450,
   bgcolor: 'background.paper',
   border: '3px solid #000',
   boxShadow: 24,
@@ -406,7 +406,7 @@ function Products() {
                   <StyledTableRow key={i}>
                     <StyledTableCell align="center">{i + 1}</StyledTableCell>
                     <StyledTableCell align="center">
-                      {d.image && <img src={`http://localhost:8081/images/${d.image}`} alt="Product Image" style={{ width: '50px', height: '50px' }} />}
+                      {d.image && <img src={`http://localhost:8081/images/${d.image}`} alt="Product Image" style={{ width: '70px', height: '70px' }} />}
                     </StyledTableCell>
                     <StyledTableCell align="center">{d.title}</StyledTableCell>
                     <StyledTableCell align="center">{d.description}</StyledTableCell>

@@ -153,7 +153,7 @@ app.get("/ordersPerDay", (req, res) => {
     GROUP BY
       orderDay
     ORDER BY
-      orderDay;
+      o.date;
   `;
   
     db.query(sql, (err, result) => {

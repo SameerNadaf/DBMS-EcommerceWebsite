@@ -120,10 +120,10 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                                     title={data.title}
                                 />
                                 <CardContent>
-                                    <Typography variant="h6" component="div">
+                                    <Typography variant="h6" component="div" sx={{fontFamily: 'Playfair Display'}}>
                                         {data.title}
                                     </Typography>
-                                    <Typography variant="body2" color="text.secondary">
+                                    <Typography variant="body1" color="text.secondary" sx={{fontFamily: 'DM Sans'}}>
                                         ₹{data.price}
                                     </Typography>
                                 </CardContent>
@@ -317,10 +317,10 @@ function CartPopover({ open, anchorEl, handleClose }) {
                                         title={data.title}
                                     />
                                     <CardContent>
-                                        <Typography variant="h6" component="div">
+                                        <Typography variant="h6" component="div" sx={{fontFamily: 'Playfair Display'}}>
                                             {data.title}
                                         </Typography>
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Typography variant="body1" color="text.secondary" sx={{fontFamily: 'DM Sans'}}>
                                             ₹{data.price}
                                         </Typography>
                                     </CardContent>
