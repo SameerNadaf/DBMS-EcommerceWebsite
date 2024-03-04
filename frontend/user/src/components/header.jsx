@@ -482,6 +482,7 @@ function Header() {
                             fontWeight: 700,
                             textDecoration: 'none',
                         }}
+                        onClick={() => { navigate("/") }}
                     >
                         <span className='logo'>Footwea<span>r</span></span>
                     </Typography>
