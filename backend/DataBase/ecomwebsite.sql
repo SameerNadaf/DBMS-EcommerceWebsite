@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2024 at 08:03 PM
+-- Generation Time: Jul 14, 2024 at 06:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,10 +56,9 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`c_id`, `product_id`) VALUES
-(266, 78),
-(267, 79),
-(270, 89),
-(271, 90);
+(272, 78),
+(273, 79),
+(274, 81);
 
 -- --------------------------------------------------------
 
@@ -191,7 +190,11 @@ INSERT INTO `orders` (`o_id`, `product_id`, `date`, `price`, `status`) VALUES
 (211, 107, '2024-03-01', 7999, 'paid'),
 (212, 78, '2024-03-04', 8999, 'unpaid'),
 (213, 79, '2024-03-04', 3999, 'unpaid'),
-(214, 81, '2024-03-04', 2999, 'unpaid');
+(214, 81, '2024-03-04', 2999, 'unpaid'),
+(215, 78, '2024-07-14', 8999, 'unpaid'),
+(216, 79, '2024-07-14', 3999, 'unpaid'),
+(217, 89, '2024-07-14', 7999, 'unpaid'),
+(218, 90, '2024-07-14', 8999, 'unpaid');
 
 -- --------------------------------------------------------
 
@@ -436,7 +439,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=275;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
@@ -448,7 +451,7 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `o_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `o_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
 
 --
 -- AUTO_INCREMENT for table `payments`
