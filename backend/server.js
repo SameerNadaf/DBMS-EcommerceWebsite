@@ -25,10 +25,10 @@ const upload = multer({
 
 const db = mysql.createConnection({
     connectionLimit: 10,
-    host: 'btpaqyz5pfc7dmtpoocf-mysql.services.clever-cloud.com',
-    user: 'ufetpenidehrwcqx',
-    password: 'c9xQ8xk1WGk3L5a0fCE2',
-    database: 'btpaqyz5pfc7dmtpoocf'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'ecomwebsite'
 });
 
 

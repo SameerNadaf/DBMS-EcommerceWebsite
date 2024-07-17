@@ -23,7 +23,7 @@ function Products() {
 
     const fetchMen = async () => {
         try {
-            const resp = await axios.get('mysql://ufetpenidehrwcqx:c9xQ8xk1WGk3L5a0fCE2@btpaqyz5pfc7dmtpoocf-mysql.services.clever-cloud.com:3306/btpaqyz5pfc7dmtpoocf/menproducts');
+            const resp = await axios.get('http://localhost:8081/menproducts');
             setMen(resp.data);
             console.log(resp);
         } catch (error) {
