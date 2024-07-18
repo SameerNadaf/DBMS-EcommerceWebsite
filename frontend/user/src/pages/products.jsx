@@ -23,7 +23,7 @@ function Products() {
 
     const fetchMen = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/menproducts');
+            const resp = await axios.get('https://backend-uqfl.onrender.com/menproducts');
             setMen(resp.data);
             console.log(resp);
         } catch (error) {
@@ -33,7 +33,7 @@ function Products() {
 
     const fetchWomen = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/womenproducts');
+            const resp = await axios.get('https://backend-uqfl.onrender.com/womenproducts');
             setWomen(resp.data);
             console.log(resp);
         } catch (error) {
@@ -43,7 +43,7 @@ function Products() {
 
     const fetchKids = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/kidsproducts');
+            const resp = await axios.get('https://backend-uqfl.onrender.com/kidsproducts');
             setKids(resp.data);
             console.log(resp);
         } catch (error) {
