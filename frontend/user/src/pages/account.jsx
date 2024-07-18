@@ -29,7 +29,7 @@ function Account() {
 
   const fetchOrder = async () => {
     try {
-      const resp = await axios.get('http://localhost:8081/getOrders');
+      const resp = await axios.get('https://backend-uqfl.onrender.com/getOrders');
       setOrder(resp.data);
       console.log(resp);
     } catch (error) {
@@ -81,7 +81,7 @@ function Account() {
       const type = 'online';
       const status = 'paid';
 
-      const paymentResponse = await axios.post('http://localhost:8081/addtopayments', {
+      const paymentResponse = await axios.post('https://backend-uqfl.onrender.com/addtopayments', {
         oId,
         currentDate,
         productPrice,
@@ -119,7 +119,7 @@ function Account() {
     const status = 'paid';
 
     try {
-      const response = await axios.put('http://localhost:8081/updateOrders/' + orderId,{status});
+      const response = await axios.put('https://backend-uqfl.onrender.com/updateOrders/' + orderId,{status});
       console.log(response.data.message);
       console.log('gg');
       fetchOrder();
@@ -237,7 +237,7 @@ function Account() {
                 <CardMedia
                   component="img"
                   alt={data.title}
-                  image={`http://localhost:8081/images/${data.image}`}
+                  image={`https://backend-uqfl.onrender.com/images/${data.image}`}
                   sx={{ height: 90, width: 80, marginTop: 1, marginBottom: 1, marginLeft: 5 }}
                 />
                 <div style={{ display: 'flex', flexDirection: 'column', width: '73%' }}>

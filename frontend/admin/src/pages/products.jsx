@@ -88,7 +88,7 @@ function Products() {
   const [data, setData] = useState([])
   const fetchData = async () => {
     try {
-      const resp = await axios.get('http://localhost:8081/productstable')
+      const resp = await axios.get('https://backend-uqfl.onrender.com/productstable')
       setData(resp.data)
       console.log(resp);
     } catch (error) {
@@ -126,7 +126,7 @@ function Products() {
     formData.append('image', image);
 
     try {
-      await axios.post('http://localhost:8081/addproduct', formData, {
+      await axios.post('https://backend-uqfl.onrender.com/addproduct', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -145,7 +145,7 @@ function Products() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete('http://localhost:8081/deleteproduct/' + id)
+      await axios.delete('https://backend-uqfl.onrender.com/deleteproduct/' + id)
       toast.success('Product deleted successful');
       fetchData();
     }
@@ -178,7 +178,7 @@ function Products() {
     };
   
     try {
-      await axios.put(`http://localhost:8081/updateproduct/${editProduct.p_id}`, updatedProduct);
+      await axios.put(`https://backend-uqfl.onrender.com/updateproduct/${editProduct.p_id}`, updatedProduct);
   
       console.log('Product updated successfully');
       toast.success('Product updated successfully');
@@ -406,7 +406,7 @@ function Products() {
                   <StyledTableRow key={i}>
                     <StyledTableCell align="center">{i + 1}</StyledTableCell>
                     <StyledTableCell align="center">
-                      {d.image && <img src={`http://localhost:8081/images/${d.image}`} alt="Product Image" style={{ width: '70px', height: '70px' }} />}
+                      {d.image && <img src={`https://backend-uqfl.onrender.com/images/${d.image}`} alt="Product Image" style={{ width: '70px', height: '70px' }} />}
                     </StyledTableCell>
                     <StyledTableCell align="center">{d.title}</StyledTableCell>
                     <StyledTableCell align="center">{d.description}</StyledTableCell>

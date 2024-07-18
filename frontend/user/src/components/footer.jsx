@@ -19,7 +19,7 @@ function Footer() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8081/newsletter', values)
+            const response = await axios.post('https://backend-uqfl.onrender.com/newsletter', values)
             console.log('Subscribe successful', response.data);
             toast.success('Successfully subscribed to the newsletter!');
             setValues({ email: '' });

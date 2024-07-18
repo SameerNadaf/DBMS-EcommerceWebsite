@@ -49,7 +49,7 @@ function Users() {
   const [data, setData] = useState([])
   const fetchData = async () => {
       try {
-          const resp = await axios.get('http://localhost:8081/userslist')
+          const resp = await axios.get('https://backend-uqfl.onrender.com/userslist')
           setData(resp.data)
           console.log(resp);
       } catch (error) {
@@ -60,7 +60,7 @@ function Users() {
   
   const handleDelete = async (id) => {
     try {
-      await axios.delete('http://localhost:8081/deleteuser/'+id)
+      await axios.delete('https://backend-uqfl.onrender.com/deleteuser/'+id)
       toast.success('User deleted successful');
       fetchData();
     }

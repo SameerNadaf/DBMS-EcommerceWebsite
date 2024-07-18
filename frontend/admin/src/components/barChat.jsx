@@ -7,7 +7,7 @@ function BarChart() {
 
   const fetchData = async () => {
     try {
-      const resp = await axios.get('http://localhost:8081/ordersPerDay');
+      const resp = await axios.get('https://backend-uqfl.onrender.com/ordersPerDay');
       setData(resp.data);
     } catch (error) {
       console.error('Error fetching product data:', error);

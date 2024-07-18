@@ -7,7 +7,7 @@ function PieChart() {
 
   const fetchData = async () => {
     try {
-      const resp = await axios.get('http://localhost:8081/piechart');
+      const resp = await axios.get('https://backend-uqfl.onrender.com/piechart');
       setData(resp.data);
     } catch (error) {
       console.error('Error fetching product data:', error);

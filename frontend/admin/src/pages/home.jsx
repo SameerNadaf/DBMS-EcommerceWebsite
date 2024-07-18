@@ -24,7 +24,7 @@ function Home() {
     const [amount, setAmount] = useState([])
     const fetchData = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/totalamount')
+            const resp = await axios.get('https://backend-uqfl.onrender.com/totalamount')
             setAmount(resp.data)
             console.log(resp);
         } catch (error) {
@@ -38,7 +38,7 @@ function Home() {
     const [orders, setOrders] = useState([])
     const fetchOrders = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/totalorders')
+            const resp = await axios.get('https://backend-uqfl.onrender.com/totalorders')
             setOrders(resp.data)
             console.log(resp);
         } catch (error) {
@@ -51,7 +51,7 @@ function Home() {
     const [products, setProducts] = useState([])
     const fetchProducts = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/totalProducts')
+            const resp = await axios.get('https://backend-uqfl.onrender.com/totalProducts')
             setProducts(resp.data)
             console.log(resp);
         } catch (error) {
@@ -64,7 +64,7 @@ function Home() {
     const [users, setUsers] = useState([])
     const fetchUsers = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/totalUsers')
+            const resp = await axios.get('https://backend-uqfl.onrender.com/totalUsers')
             setUsers(resp.data)
             console.log(resp);
         } catch (error) {

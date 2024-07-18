@@ -39,7 +39,7 @@ function Orders() {
   const [data, setData] = useState([])
   const fetchData = async () => {
       try {
-          const resp = await axios.get('http://localhost:8081/orderstable')
+          const resp = await axios.get('https://backend-uqfl.onrender.com/orderstable')
           setData(resp.data)
           console.log(resp);
       } catch (error) {

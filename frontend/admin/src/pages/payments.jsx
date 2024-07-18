@@ -39,7 +39,7 @@ function Payments() {
   const [data, setData] = useState([])
   const fetchData = async () => {
       try {
-          const resp = await axios.get('http://localhost:8081/paymentstable')
+          const resp = await axios.get('https://backend-uqfl.onrender.com/paymentstable')
           setData(resp.data)
           console.log(resp);
       } catch (error) {

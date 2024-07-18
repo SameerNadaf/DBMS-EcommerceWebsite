@@ -39,7 +39,7 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
 
     const fetchWish = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/wishlist');
+            const resp = await axios.get('https://backend-uqfl.onrender.com/wishlist');
             setWish(resp.data);
             console.log(resp);
         } catch (error) {
@@ -49,7 +49,7 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
 
     const handleRemoveItem = async (id) => {
         try {
-            await axios.delete('http://localhost:8081/wishlistdelete/' + id)
+            await axios.delete('https://backend-uqfl.onrender.com/wishlistdelete/' + id)
             console.log('Product removed successful');
             toast.success('Product removed successful', {
                 position:"top-center",
@@ -116,7 +116,7 @@ function WishlistPopover({ open, anchorEl, handleClose }) {
                             <Card sx={{ display: 'flex', flexDirection: 'row', width: '96%', alignItems: 'center' }}>
                                 <CardMedia
                                     sx={{ width: 60, height: 60, marginRight: 2, marginTop: 2, marginLeft: 2, display: 'flex', alignItems: 'center' }}
-                                    image={`http://localhost:8081/images/${data.image}`}
+                                    image={`https://backend-uqfl.onrender.com/images/${data.image}`}
                                     title={data.title}
                                 />
                                 <CardContent>
@@ -165,7 +165,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
 
     const fetchCart = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/cart');
+            const resp = await axios.get('https://backend-uqfl.onrender.com/cart');
             setCart(resp.data);
             console.log(resp);
         } catch (error) {
@@ -175,7 +175,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
 
     const handleDeleteItem = async (id) => {
         try {
-            await axios.delete('http://localhost:8081/cartdelete/' + id)
+            await axios.delete('https://backend-uqfl.onrender.com/cartdelete/' + id)
             console.log('Product deleted successful');
             toast.success('Product deleted successful', {
                 position:"top-center",
@@ -218,7 +218,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
 
             const orderItems = await Promise.all(productDetailPromises);
 
-            await axios.post('http://localhost:8081/orders', { orderItems });
+            await axios.post('https://backend-uqfl.onrender.com/orders', { orderItems });
 
             console.log('Order placed successfully');
 
@@ -253,7 +253,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
 
     const clearCart = async () => {
         try {
-            await axios.delete('http://localhost:8081/clearCart');
+            await axios.delete('https://backend-uqfl.onrender.com/clearCart');
             console.log('Cart cleared');
             setCart([]);
 
@@ -313,7 +313,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
                                 <Card sx={{ display: 'flex', flexDirection: 'row', width: '96%', alignItems: 'center' }}>
                                     <CardMedia
                                         sx={{ width: 60, height: 60, margin: 2, display: 'flex', alignItems: 'center' }}
-                                        image={`http://localhost:8081/images/${data.image}`}
+                                        image={`https://backend-uqfl.onrender.com/images/${data.image}`}
                                         title={data.title}
                                     />
                                     <CardContent>
@@ -379,7 +379,7 @@ function CartPopover({ open, anchorEl, handleClose }) {
                             <Grid container spacing={2}>
                                 {cart?.map((product) => (
                                     <Grid item key={product.p_id} xs={12} sm={3}>
-                                        {product.image && <img src={`http://localhost:8081/images/${product.image}`}
+                                        {product.image && <img src={`https://backend-uqfl.onrender.com/images/${product.image}`}
                                             alt="Product Image" style={{ width: '50px', height: '50px' }} />}
                                     </Grid>
                                 ))}
@@ -469,7 +469,7 @@ function Header() {
     const [items, setItems] = useState([])
     const fetchData = async () => {
         try {
-            const resp = await axios.get('http://localhost:8081/cartCount')
+            const resp = await axios.get('https://backend-uqfl.onrender.com/cartCount')
             setItems(resp.data)
             console.log(resp);
         } catch (error) {

@@ -36,7 +36,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8081/admin', formData);
+            const response = await axios.post('https://backend-uqfl.onrender.com/admin', formData);
             console.log('Login successful', response.data);
             toast.success('Login successful');
             navigate('/home')
