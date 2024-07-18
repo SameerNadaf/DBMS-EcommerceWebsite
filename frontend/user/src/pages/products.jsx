@@ -54,7 +54,7 @@ function Products() {
 
     const handleAddToCart = async (id) => {
         try {
-            await axios.post('http://localhost:8081/addtocart/' + id)
+            await axios.post('https://backend-uqfl.onrender.com/addtocart/' + id)
             console.log('Product added successful');
             toast.success('Product added to cart');
         }
@@ -66,7 +66,7 @@ function Products() {
 
     const handleAddToWish = async (id) => {
         try {
-            await axios.post('http://localhost:8081/addtowishlist/' + id)
+            await axios.post('https://backend-uqfl.onrender.com/addtowishlist/' + id)
             console.log('Product added successful');
             toast.success('Product added to wishlist');
         }
@@ -107,7 +107,7 @@ function Products() {
                                     <div className="image">
                                         {d.image && (
                                             <img
-                                                src={`http://localhost:8081/images/${d.image}`}
+                                                src={`https://backend-uqfl.onrender.com/images/${d.image}`}
                                                 alt="Product Image"
                                             />
                                         )}
@@ -147,7 +147,7 @@ function Products() {
                                     <div className="image">
                                         {d.image && (
                                             <img
-                                                src={`http://localhost:8081/images/${d.image}`}
+                                                src={`https://backend-uqfl.onrender.com/images/${d.image}`}
                                                 alt="Product Image"
                                             />
                                         )}
@@ -187,7 +187,7 @@ function Products() {
                                     <div className="image">
                                         {d.image && (
                                             <img
-                                                src={`http://localhost:8081/images/${d.image}`}
+                                                src={`https://backend-uqfl.onrender.com/images/${d.image}`}
                                                 alt="Product Image"
                                             />
                                         )}
