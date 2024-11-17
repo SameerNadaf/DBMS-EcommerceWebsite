@@ -216,7 +216,7 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`pay_id`, `orderId`, `type`, `date`, `amount`, `status`) VALUES
-(15, 0, 'online', '2024-02-27', 8999, 'paid'),
+(15, 0, 'online', '2024-02-27', 9999, 'paid'),
 (16, 0, 'online', '2024-02-27', 7999, 'paid'),
 (17, 0, 'online', '2024-02-27', 8999, 'paid'),
 (18, 0, 'online', '2024-02-27', 7999, 'paid'),
